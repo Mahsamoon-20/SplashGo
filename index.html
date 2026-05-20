@@ -4,231 +4,241 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>SplashGo – Mobile Car Wash | GTA</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --sky: #1AAFFF; --navy: #0A1628; --foam: #E8F8FF;
-    --sun: #FFD93D; --green: #3DDC84; --coral: #FF6B6B;
-    --text: #1a2a3a; --muted: #6b8099;
-    --radius: 18px; --shadow: 0 8px 32px rgba(10,22,40,0.10);
+    --red: #E8151B;
+    --red2: #ff3a3f;
+    --dark: #080808;
+    --dark2: #111111;
+    --dark3: #1a1a1a;
+    --dark4: #222222;
+    --border: rgba(232,21,27,0.25);
+    --text: #f0f0f0;
+    --muted: #888888;
+    --radius: 14px;
+    --shadow: 0 8px 40px rgba(0,0,0,0.6);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Nunito', sans-serif; background: var(--foam); color: var(--text); overflow-x: hidden; }
+  body { font-family: 'Barlow', sans-serif; background: var(--dark); color: var(--text); overflow-x: hidden; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
 
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(255,255,255,0.93); backdrop-filter: blur(12px);
+    background: rgba(8,8,8,0.95); backdrop-filter: blur(16px);
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 6vw; height: 64px; box-shadow: 0 2px 16px rgba(10,22,40,0.07);
+    padding: 0 6vw; height: 64px;
+    border-bottom: 1px solid var(--border);
   }
-  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--sky); letter-spacing: 2px; }
-  .nav-logo span { color: var(--navy); }
-  .nav-links { display: flex; gap: 28px; list-style: none; }
-  .nav-links a { text-decoration: none; color: var(--text); font-weight: 700; font-size: 0.95rem; transition: color .2s; }
-  .nav-links a:hover { color: var(--sky); }
-  .nav-cta { background: var(--sky); color: #fff; font-weight: 800; border: none; padding: 10px 22px; border-radius: 50px; cursor: pointer; font-size: 0.95rem; transition: transform .15s, box-shadow .15s; }
-  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,175,255,0.35); }
+  .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 900; color: #fff; letter-spacing: 2px; }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px; text-transform: uppercase; transition: color .2s; }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta { background: var(--red); color: #fff; font-weight: 800; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.88rem; letter-spacing: 1px; text-transform: uppercase; transition: background .15s, transform .15s; font-family: 'Barlow', sans-serif; }
+  .nav-cta:hover { background: var(--red2); transform: translateY(-1px); }
   .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
-  .hamburger span { display: block; width: 24px; height: 2.5px; background: var(--navy); margin: 5px 0; border-radius: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: #fff; margin: 6px 0; }
 
   /* HERO */
   .hero {
-    min-height: 100vh; background: var(--navy);
+    min-height: 100vh; background: var(--dark);
     display: grid; grid-template-columns: 1fr 1fr; align-items: center;
     position: relative; overflow: hidden; padding: 100px 6vw 60px; gap: 40px;
   }
   .hero::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(26,175,255,0.15) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 40% at 10% 80%, rgba(255,217,61,0.08) 0%, transparent 60%);
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 70% at 75% 50%, rgba(232,21,27,0.12) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 40% at 10% 20%, rgba(232,21,27,0.06) 0%, transparent 60%);
   }
-  .bubbles { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-  .bubble { position: absolute; border-radius: 50%; background: rgba(26,175,255,0.10); animation: float linear infinite; }
-  @keyframes float {
-    0% { transform: translateY(110vh) scale(0.8); opacity: 0; }
-    10% { opacity: 1; } 90% { opacity: 1; }
-    100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+  /* grid lines texture */
+  .hero::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image: linear-gradient(rgba(232,21,27,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(232,21,27,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
   }
-  .hero-content { position: relative; z-index: 2; animation: fadeUp .8s ease both; }
-  .hero-visual { position: relative; z-index: 2; animation: fadeUp .8s .2s ease both; display: flex; align-items: center; justify-content: center; }
-  @keyframes fadeUp { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
-  .hero-badge { display: inline-block; background: rgba(26,175,255,0.2); color: var(--sky); border: 1.5px solid rgba(26,175,255,0.4); border-radius: 50px; padding: 6px 18px; font-size: 0.85rem; font-weight: 800; letter-spacing: 1px; margin-bottom: 20px; text-transform: uppercase; }
-  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1; color: #fff; margin-bottom: 18px; }
-  .hero h1 .accent { color: var(--sky); }
-  .hero p { color: rgba(255,255,255,0.75); font-size: 1.1rem; line-height: 1.7; margin-bottom: 32px; max-width: 440px; }
+  .hero-content { position: relative; z-index: 2; animation: fadeUp .7s ease both; }
+  .hero-visual { position: relative; z-index: 2; animation: fadeUp .7s .15s ease both; display: flex; align-items: center; justify-content: center; }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(28px); } to { opacity:1; transform: translateY(0); } }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(232,21,27,0.12); color: var(--red); border: 1px solid var(--border); border-radius: 4px; padding: 6px 16px; font-size: 0.78rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 22px; text-transform: uppercase; }
+  .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3.5rem, 8vw, 6.5rem); font-weight: 900; line-height: 0.95; color: #fff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px; }
+  .hero h1 .accent { color: var(--red); display: block; }
+  .hero p { color: var(--muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 34px; max-width: 420px; }
   .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn-primary { background: var(--sky); color: #fff; font-weight: 800; border: none; padding: 16px 34px; border-radius: 50px; cursor: pointer; font-size: 1rem; transition: transform .15s, box-shadow .15s; font-family: 'Nunito', sans-serif; }
-  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(26,175,255,0.4); }
-  .btn-outline { background: transparent; color: #fff; font-weight: 800; border: 2px solid rgba(255,255,255,0.3); padding: 16px 34px; border-radius: 50px; cursor: pointer; font-size: 1rem; transition: border-color .15s, background .15s; font-family: 'Nunito', sans-serif; }
-  .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
-  .hero-stats { margin-top: 48px; display: flex; gap: 36px; flex-wrap: wrap; }
-  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--sky); }
-  .stat-label { color: rgba(255,255,255,0.5); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-  /* hero car SVG scene */
-  .hero-car-scene { width: 100%; max-width: 520px; filter: drop-shadow(0 20px 60px rgba(26,175,255,0.3)); }
+  .btn-primary { background: var(--red); color: #fff; font-weight: 800; border: none; padding: 15px 32px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; transition: background .15s, transform .15s; font-family: 'Barlow', sans-serif; }
+  .btn-primary:hover { background: var(--red2); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: #fff; font-weight: 800; border: 1px solid rgba(255,255,255,0.2); padding: 15px 32px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; transition: border-color .15s, background .15s; font-family: 'Barlow', sans-serif; }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); }
+  .hero-stats { margin-top: 52px; display: flex; gap: 40px; flex-wrap: wrap; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.07); }
+  .stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--red); line-height: 1; }
+  .stat-label { color: var(--muted); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
+  .hero-car-scene { width: 100%; max-width: 540px; filter: drop-shadow(0 20px 60px rgba(232,21,27,0.25)); }
 
-  /* SHARED SECTION */
-  section { padding: 80px 6vw; }
-  .section-label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--sky); margin-bottom: 10px; }
-  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--navy); margin-bottom: 12px; }
-  .section-sub { color: var(--muted); font-size: 1.05rem; max-width: 520px; line-height: 1.7; }
+  /* SECTIONS */
+  section { padding: 90px 6vw; }
+  .section-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: var(--red); margin-bottom: 12px; }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 900; color: #fff; margin-bottom: 14px; text-transform: uppercase; letter-spacing: -0.5px; }
+  .section-sub { color: var(--muted); font-size: 1rem; max-width: 500px; line-height: 1.7; }
 
   /* HOW IT WORKS */
-  #how { background: #fff; }
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-top: 48px; }
-  .step-card { background: var(--foam); border-radius: var(--radius); padding: 32px 28px; position: relative; transition: transform .2s, box-shadow .2s; }
-  .step-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
-  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; line-height: 1; color: rgba(26,175,255,0.15); position: absolute; top: 18px; right: 24px; }
-  .step-icon { font-size: 2.2rem; margin-bottom: 16px; }
-  .step-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; color: var(--navy); }
-  .step-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+  #how { background: var(--dark2); }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; margin-top: 52px; }
+  .step-card { background: var(--dark3); padding: 36px 28px; position: relative; transition: background .2s; border: 1px solid rgba(255,255,255,0.04); }
+  .step-card:hover { background: var(--dark4); }
+  .step-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); transform: scaleX(0); transition: transform .3s; transform-origin: left; }
+  .step-card:hover::before { transform: scaleX(1); }
+  .step-num { font-family: 'Barlow Condensed', sans-serif; font-size: 4rem; font-weight: 900; line-height: 1; color: rgba(232,21,27,0.12); position: absolute; top: 16px; right: 22px; }
+  .step-icon { font-size: 2rem; margin-bottom: 18px; }
+  .step-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 10px; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
+  .step-card p { color: var(--muted); font-size: 0.93rem; line-height: 1.65; }
 
   /* GALLERY */
-  #gallery { background: var(--navy); padding: 80px 6vw; }
-  #gallery .section-label { color: var(--sky); }
-  #gallery .section-title { color: #fff; }
-  #gallery .section-sub { color: rgba(255,255,255,0.5); }
-  .gallery-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 220px 220px; gap: 14px; margin-top: 40px; }
-  .gallery-item { border-radius: 16px; overflow: hidden; position: relative; transition: transform .3s; cursor: pointer; }
-  .gallery-item:hover { transform: scale(1.02); }
+  #gallery { background: var(--dark); padding: 90px 6vw; }
+  .gallery-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 230px 230px; gap: 3px; margin-top: 48px; }
+  .gallery-item { overflow: hidden; position: relative; transition: opacity .25s; cursor: pointer; }
+  .gallery-item:hover { opacity: 0.85; }
   .gallery-item:first-child { grid-row: span 2; }
   .gallery-item svg { width: 100%; height: 100%; display: block; }
+  .gallery-item::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(232,21,27,0.15); pointer-events: none; }
   @media(max-width: 700px) {
     .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
     .gallery-item:first-child { grid-column: span 2; grid-row: span 1; }
-    .gallery-item { height: 160px; }
+    .gallery-item { height: 150px; }
   }
 
   /* SERVICES */
-  #services { background: var(--foam); }
-  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 48px; }
-  .service-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; position: relative; }
-  .service-card:hover { transform: translateY(-8px); box-shadow: 0 16px 48px rgba(10,22,40,0.13); }
-  .service-card.popular::before { content: '⭐ Most Popular'; position: absolute; top: 148px; right: 16px; background: var(--sun); color: var(--navy); font-size: 0.72rem; font-weight: 800; padding: 4px 12px; border-radius: 50px; text-transform: uppercase; z-index: 3; }
-  .service-thumb { width: 100%; height: 160px; display: block; }
-  .service-header { padding: 22px 24px 0; }
-  .service-name { font-size: 1.2rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
-  .service-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 14px; }
-  .service-features { list-style: none; padding: 0 24px; margin-bottom: 16px; }
-  .service-features li { padding: 6px 0; border-bottom: 1px solid #f0f4f8; font-size: 0.88rem; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  #services { background: var(--dark2); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; margin-top: 52px; }
+  .service-card { background: var(--dark3); overflow: hidden; transition: background .2s; position: relative; border: 1px solid rgba(255,255,255,0.04); }
+  .service-card:hover { background: var(--dark4); }
+  .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--red); transform: scaleX(0); transition: transform .3s; transform-origin: left; }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-card.popular { border-top: 3px solid var(--red); }
+  .popular-badge { position: absolute; top: 12px; right: 12px; background: var(--red); color: #fff; font-size: 0.68rem; font-weight: 800; padding: 4px 10px; letter-spacing: 1px; text-transform: uppercase; z-index: 3; }
+  .service-thumb { width: 100%; height: 155px; display: block; }
+  .service-header { padding: 20px 22px 0; }
+  .service-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .service-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 14px; }
+  .service-features { list-style: none; padding: 0 22px; margin-bottom: 14px; }
+  .service-features li { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.86rem; color: #ccc; display: flex; align-items: center; gap: 10px; }
   .service-features li:last-child { border-bottom: none; }
-  .service-features li::before { content: '✓'; color: var(--green); font-weight: 900; font-size: 0.85rem; }
-  .service-footer { padding: 16px 24px 24px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f0f4f8; }
-  .price-from { font-size: 0.72rem; color: var(--muted); font-weight: 700; display: block; }
-  .price-amount { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--navy); line-height: 1; }
-  .price-unit { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
-  .book-btn { background: var(--navy); color: #fff; border: none; border-radius: 50px; padding: 11px 22px; font-weight: 800; font-size: 0.88rem; cursor: pointer; transition: background .15s, transform .15s; font-family: 'Nunito', sans-serif; }
-  .book-btn:hover { background: var(--sky); transform: scale(1.04); }
+  .service-features li::before { content: '—'; color: var(--red); font-weight: 900; font-size: 0.8rem; flex-shrink: 0; }
+  .service-footer { padding: 14px 22px 22px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.05); }
+  .price-from { font-size: 0.68rem; color: var(--muted); font-weight: 700; display: block; text-transform: uppercase; letter-spacing: 1px; }
+  .price-amount { font-family: 'Barlow Condensed', sans-serif; font-size: 2.2rem; font-weight: 900; color: #fff; line-height: 1; }
+  .price-unit { font-size: 0.72rem; color: var(--muted); font-weight: 600; }
+  .book-btn { background: transparent; color: var(--red); border: 1px solid var(--red); padding: 10px 20px; font-weight: 800; font-size: 0.82rem; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; transition: background .15s, color .15s; font-family: 'Barlow', sans-serif; border-radius: 3px; }
+  .book-btn:hover { background: var(--red); color: #fff; }
 
   /* BOOKING */
-  #booking { background: #fff; }
-  .booking-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; align-items: start; }
-  .booking-info h3 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 8px; margin-top: 24px; }
+  #booking { background: var(--dark); }
+  .booking-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 52px; align-items: start; }
+  .booking-info h3 { font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 8px; margin-top: 28px; text-transform: uppercase; letter-spacing: 0.5px; }
   .booking-info h3:first-child { margin-top: 0; }
-  .booking-info p { color: var(--muted); line-height: 1.7; font-size: 0.93rem; }
-  .deposit-box { background: linear-gradient(135deg, var(--navy) 0%, #1a3260 100%); border-radius: var(--radius); padding: 26px; color: #fff; margin-top: 24px; }
-  .deposit-box h4 { font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
-  .deposit-box p { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
-  .deposit-amount { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--sky); line-height: 1; margin: 6px 0 4px; }
-  .booking-form { background: var(--foam); border-radius: var(--radius); padding: 34px; }
-  .form-title { font-size: 1.2rem; font-weight: 900; color: var(--navy); margin-bottom: 22px; }
+  .booking-info p { color: var(--muted); line-height: 1.7; font-size: 0.92rem; }
+  .deposit-box { background: var(--red); border-radius: 4px; padding: 26px; color: #fff; margin-top: 28px; }
+  .deposit-box h4 { font-size: 0.82rem; font-weight: 800; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; }
+  .deposit-box p { font-size: 0.88rem; color: rgba(255,255,255,0.8); line-height: 1.6; }
+  .deposit-amount { font-family: 'Barlow Condensed', sans-serif; font-size: 3.5rem; font-weight: 900; color: #fff; line-height: 1; margin: 4px 0; }
+  .booking-form { background: var(--dark2); border: 1px solid rgba(255,255,255,0.06); padding: 36px; }
+  .form-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 26px; text-transform: uppercase; letter-spacing: 0.5px; }
   .form-group { margin-bottom: 16px; }
-  .form-group label { display: block; font-weight: 700; font-size: 0.85rem; color: var(--navy); margin-bottom: 5px; }
-  .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 15px; border: 2px solid #dde8f0; border-radius: 12px; font-family: 'Nunito', sans-serif; font-size: 0.93rem; color: var(--text); background: #fff; transition: border-color .15s; outline: none; }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--sky); box-shadow: 0 0 0 3px rgba(26,175,255,0.12); }
+  .form-group label { display: block; font-weight: 700; font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.1); background: var(--dark3); color: #fff; font-family: 'Barlow', sans-serif; font-size: 0.93rem; transition: border-color .15s; outline: none; border-radius: 3px; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--red); }
+  .form-group select option { background: var(--dark3); }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .form-group textarea { resize: vertical; min-height: 76px; }
-  .submit-btn { width: 100%; background: var(--sky); color: #fff; border: none; border-radius: 50px; padding: 15px; font-weight: 900; font-size: 1rem; cursor: pointer; transition: transform .15s, box-shadow .15s; font-family: 'Nunito', sans-serif; margin-top: 4px; }
-  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(26,175,255,0.4); }
-  .form-note { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 10px; }
-  .booking-success { display: none; text-align: center; padding: 48px 20px; }
+  .submit-btn { width: 100%; background: var(--red); color: #fff; border: none; padding: 16px; font-weight: 800; font-size: 0.9rem; cursor: pointer; letter-spacing: 1.5px; text-transform: uppercase; transition: background .15s; font-family: 'Barlow', sans-serif; margin-top: 6px; border-radius: 3px; }
+  .submit-btn:hover { background: var(--red2); }
+  .form-note { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top: 10px; }
+  .booking-success { display: none; text-align: center; padding: 52px 20px; }
   .booking-success .success-icon { font-size: 4rem; margin-bottom: 16px; }
-  .booking-success h3 { font-size: 1.4rem; font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+  .booking-success h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 10px; text-transform: uppercase; }
   .booking-success p { color: var(--muted); }
 
   /* AREA */
-  #area { background: var(--foam); text-align: center; }
-  .area-map { margin-top: 40px; background: #fff; border-radius: var(--radius); padding: 48px 24px; box-shadow: var(--shadow); }
-  .area-icon { font-size: 3.5rem; margin-bottom: 16px; }
-  .area-map h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--navy); margin-bottom: 10px; }
+  #area { background: var(--dark2); text-align: center; }
+  .area-map { margin-top: 44px; background: var(--dark3); border: 1px solid rgba(255,255,255,0.05); padding: 52px 24px; }
+  .area-icon { font-size: 3rem; margin-bottom: 16px; }
+  .area-map h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 10px; text-transform: uppercase; }
   .area-map p { color: var(--muted); max-width: 480px; margin: 0 auto; line-height: 1.7; }
-  .area-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 22px; }
-  .area-tag { background: rgba(26,175,255,0.1); color: var(--sky); border: 1.5px solid rgba(26,175,255,0.25); border-radius: 50px; padding: 7px 18px; font-size: 0.88rem; font-weight: 700; }
+  .area-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 24px; }
+  .area-tag { background: rgba(232,21,27,0.1); color: var(--red); border: 1px solid var(--border); padding: 7px 18px; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
 
   /* REVIEWS */
-  #reviews { background: #fff; }
-  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 48px; }
-  .review-card { background: var(--foam); border-radius: var(--radius); padding: 28px; }
-  .review-stars { color: var(--sun); font-size: 1.1rem; margin-bottom: 12px; }
-  .review-text { color: var(--text); font-size: 0.93rem; line-height: 1.7; margin-bottom: 16px; font-style: italic; }
-  .review-author { display: flex; align-items: center; gap: 12px; }
-  .review-avatar { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: #fff; flex-shrink: 0; }
-  .review-name { font-weight: 800; font-size: 0.9rem; color: var(--navy); }
-  .review-loc { font-size: 0.78rem; color: var(--muted); }
+  #reviews { background: var(--dark); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; margin-top: 52px; }
+  .review-card { background: var(--dark2); border: 1px solid rgba(255,255,255,0.04); padding: 30px; }
+  .review-stars { color: var(--red); font-size: 1rem; margin-bottom: 14px; letter-spacing: 2px; }
+  .review-text { color: #bbb; font-size: 0.93rem; line-height: 1.75; margin-bottom: 20px; }
+  .review-author { display: flex; align-items: center; gap: 14px; }
+  .review-avatar { width: 44px; height: 44px; border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 900; color: #fff; flex-shrink: 0; background: var(--red); }
+  .review-name { font-weight: 800; font-size: 0.9rem; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
+  .review-loc { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
 
   /* FAQ */
-  #faq { background: var(--foam); }
-  .faq-list { margin-top: 48px; max-width: 700px; }
-  .faq-item { background: #fff; border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
-  .faq-q { padding: 20px 24px; font-weight: 800; color: var(--navy); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
-  .faq-q:hover { color: var(--sky); }
-  .faq-arrow { font-size: 1.1rem; transition: transform .25s; color: var(--sky); }
+  #faq { background: var(--dark2); }
+  .faq-list { margin-top: 52px; max-width: 720px; }
+  .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .faq-q { padding: 20px 0; font-weight: 700; color: #ddd; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; font-size: 0.95rem; transition: color .15s; }
+  .faq-q:hover { color: var(--red); }
+  .faq-item.open .faq-q { color: var(--red); }
+  .faq-arrow { font-size: 1rem; transition: transform .25s; color: var(--red); flex-shrink: 0; margin-left: 16px; }
   .faq-item.open .faq-arrow { transform: rotate(180deg); }
   .faq-a { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
   .faq-item.open .faq-a { max-height: 200px; }
-  .faq-a p { padding: 0 24px 20px; color: var(--muted); line-height: 1.7; font-size: 0.93rem; }
+  .faq-a p { padding: 0 0 20px; color: var(--muted); line-height: 1.75; font-size: 0.92rem; }
 
   /* FOOTER */
-  footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 48px 6vw 32px; text-align: center; }
-  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--sky); letter-spacing: 2px; margin-bottom: 10px; }
-  .footer-tagline { font-size: 0.9rem; margin-bottom: 28px; }
-  .footer-links { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; margin-bottom: 28px; }
-  .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.88rem; font-weight: 700; transition: color .15s; }
-  .footer-links a:hover { color: var(--sky); }
-  .footer-copy { font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; }
+  footer { background: #050505; border-top: 1px solid var(--border); color: var(--muted); padding: 52px 6vw 32px; text-align: center; }
+  .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 2.2rem; font-weight: 900; color: #fff; letter-spacing: 2px; margin-bottom: 8px; text-transform: uppercase; }
+  .footer-logo span { color: var(--red); }
+  .footer-tagline { font-size: 0.85rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+  .footer-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 30px; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: color .15s; }
+  .footer-links a:hover { color: var(--red); }
+  .footer-copy { font-size: 0.75rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; text-transform: uppercase; letter-spacing: 1px; }
 
   /* MODAL */
-  .modal-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(10,22,40,0.65); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 20px; }
   .modal-overlay.active { display: flex; }
-  .modal { background: #fff; border-radius: 24px; padding: 38px; max-width: 440px; width: 100%; animation: modalIn .3s ease both; }
-  @keyframes modalIn { from { opacity:0; transform: scale(0.92) translateY(16px); } to { opacity:1; transform: scale(1) translateY(0); } }
-  .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 22px; }
-  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--navy); }
-  .modal-close { background: #f0f4f8; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
-  .modal-summary { background: var(--foam); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
-  .modal-summary .row { display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 6px; }
-  .modal-summary .row:last-child { margin: 8px 0 0; padding-top: 8px; border-top: 1px solid #dde8f0; font-weight: 800; color: var(--navy); font-size: 0.96rem; }
-  .modal-summary .row span:first-child { color: var(--muted); }
-  .payment-methods { display: flex; gap: 10px; margin-bottom: 20px; }
-  .pay-method { flex: 1; border: 2px solid #dde8f0; border-radius: 12px; padding: 12px 8px; text-align: center; cursor: pointer; transition: border-color .15s; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
-  .pay-method.active { border-color: var(--sky); background: rgba(26,175,255,0.06); color: var(--sky); }
-  .pm-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
-  .card-fields { display: grid; gap: 12px; }
-  .card-fields input { width: 100%; padding: 12px 15px; border: 2px solid #dde8f0; border-radius: 12px; font-family: 'Nunito', sans-serif; font-size: 0.93rem; outline: none; transition: border-color .15s; }
-  .card-fields input:focus { border-color: var(--sky); }
-  .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .pay-now-btn { width: 100%; background: var(--sky); color: #fff; border: none; border-radius: 50px; padding: 15px; font-weight: 900; font-size: 1rem; cursor: pointer; font-family: 'Nunito', sans-serif; margin-top: 8px; transition: transform .15s, box-shadow .15s; }
-  .pay-now-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(26,175,255,0.38); }
-  .secure-note { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 10px; color: var(--muted); font-size: 0.78rem; font-weight: 700; }
-  .info-box { background: #f0f8ff; border-radius: 12px; padding: 16px; font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .modal { background: var(--dark2); border: 1px solid var(--border); padding: 38px; max-width: 440px; width: 100%; animation: modalIn .25s ease both; }
+  @keyframes modalIn { from { opacity:0; transform: scale(0.95) translateY(12px); } to { opacity:1; transform: scale(1) translateY(0); } }
+  .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+  .modal-title { font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
+  .modal-close { background: var(--dark3); border: none; width: 34px; height: 34px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; color: var(--muted); transition: color .15s; }
+  .modal-close:hover { color: var(--red); }
+  .modal-summary { background: var(--dark3); padding: 16px; margin-bottom: 22px; border-left: 3px solid var(--red); }
+  .modal-summary .row { display: flex; justify-content: space-between; font-size: 0.86rem; margin-bottom: 6px; }
+  .modal-summary .row:last-child { margin: 8px 0 0; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.07); font-weight: 800; color: #fff; font-size: 0.93rem; }
+  .modal-summary .row span:first-child { color: var(--muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; }
+  .payment-methods { display: flex; gap: 8px; margin-bottom: 20px; }
+  .pay-method { flex: 1; border: 1px solid rgba(255,255,255,0.1); background: var(--dark3); padding: 12px 8px; text-align: center; cursor: pointer; transition: border-color .15s; font-size: 0.78rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .pay-method.active { border-color: var(--red); color: var(--red); background: rgba(232,21,27,0.08); }
+  .pm-icon { font-size: 1.5rem; display: block; margin-bottom: 5px; }
+  .card-fields { display: grid; gap: 10px; }
+  .card-fields input { width: 100%; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.1); background: var(--dark3); color: #fff; font-family: 'Barlow', sans-serif; font-size: 0.93rem; outline: none; transition: border-color .15s; border-radius: 3px; }
+  .card-fields input:focus { border-color: var(--red); }
+  .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pay-now-btn { width: 100%; background: var(--red); color: #fff; border: none; padding: 15px; font-weight: 800; font-size: 0.88rem; cursor: pointer; font-family: 'Barlow', sans-serif; margin-top: 8px; letter-spacing: 1.5px; text-transform: uppercase; transition: background .15s; border-radius: 3px; }
+  .pay-now-btn:hover { background: var(--red2); }
+  .secure-note { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 10px; color: var(--muted); font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .info-box { background: var(--dark3); border-left: 3px solid var(--red); padding: 16px; font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .info-box strong { color: #fff; }
 
   /* RESPONSIVE */
-  @media(max-width: 860px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-visual { display: none; }
-  }
-  @media(max-width: 768px) {
-    .booking-wrap { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-  }
-  @media(max-width: 680px) {
-    .nav-links, .nav-cta { display: none; }
-    .hamburger { display: block; }
-    nav { padding: 0 5vw; }
-    .hero { padding: 90px 5vw 50px; }
-  }
+  @media(max-width: 860px) { .hero { grid-template-columns: 1fr; } .hero-visual { display: none; } }
+  @media(max-width: 768px) { .booking-wrap { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
+  @media(max-width: 680px) { .nav-links, .nav-cta { display: none; } .hamburger { display: block; } nav { padding: 0 5vw; } .hero { padding: 90px 5vw 50px; } }
 </style>
 </head>
 <body>
@@ -242,16 +252,15 @@
     <li><a href="#booking">Book Now</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book Now 🚗</button>
+  <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book Now</button>
   <button class="hamburger"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="bubbles" id="bubbles"></div>
   <div class="hero-content">
     <div class="hero-badge">📍 Serving All of GTA</div>
-    <h1>Your Car.<br><span class="accent">Sparkling</span><br>Clean.</h1>
+    <h1>Your Car.<br><span class="accent">Sparkling</span>Clean.</h1>
     <p>We come to you — at home, at work, wherever. Book a mobile wash in minutes and we'll handle the rest.</p>
     <div class="hero-btns">
       <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book a Wash →</button>
@@ -263,102 +272,100 @@
       <div class="stat-item"><div class="stat-num">GTA</div><div class="stat-label">Wide Coverage</div></div>
     </div>
   </div>
-  <!-- Hero SVG Car Scene -->
   <div class="hero-visual">
     <svg class="hero-car-scene" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg">
-      <!-- Ground / road -->
-      <ellipse cx="260" cy="310" rx="230" ry="22" fill="rgba(26,175,255,0.08)"/>
-      <rect x="30" y="295" width="460" height="12" rx="6" fill="#0d2040"/>
-      <!-- Road lines -->
-      <rect x="120" y="299" width="40" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
-      <rect x="220" y="299" width="40" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
-      <rect x="320" y="299" width="40" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
-      <!-- Car body -->
-      <rect x="60" y="220" width="400" height="75" rx="18" fill="#1565c0"/>
-      <rect x="60" y="220" width="400" height="75" rx="18" fill="url(#carGrad)"/>
-      <!-- Cabin -->
-      <path d="M150 220 Q170 155 210 145 L340 145 Q380 145 390 165 L415 220 Z" fill="#1976d2"/>
-      <path d="M150 220 Q170 155 210 145 L340 145 Q380 145 390 165 L415 220 Z" fill="url(#cabinGrad)"/>
-      <!-- Windows -->
-      <path d="M175 215 Q185 168 215 158 L280 158 L280 215 Z" fill="#7ecfff" opacity="0.85"/>
-      <path d="M290 158 L340 158 Q368 158 380 172 L395 215 L290 215 Z" fill="#7ecfff" opacity="0.85"/>
-      <!-- Window divider -->
-      <rect x="283" y="157" width="5" height="58" rx="2" fill="#1565c0"/>
-      <!-- Window shine -->
-      <path d="M195 165 Q210 162 225 168" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.5"/>
-      <path d="M305 162 Q325 160 345 167" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.5"/>
-      <!-- Door lines -->
-      <line x1="270" y1="222" x2="270" y2="293" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-      <circle cx="262" cy="258" r="5" fill="rgba(255,255,255,0.3)"/>
-      <circle cx="278" cy="258" r="5" fill="rgba(255,255,255,0.3)"/>
-      <!-- Front grill -->
-      <rect x="62" y="247" width="48" height="22" rx="8" fill="#0d47a1"/>
-      <rect x="66" y="251" width="40" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
-      <rect x="66" y="259" width="40" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
-      <!-- Headlight -->
-      <rect x="65" y="228" width="42" height="16" rx="7" fill="#FFF9C4"/>
-      <rect x="65" y="228" width="42" height="16" rx="7" fill="url(#headlightGrad)"/>
-      <!-- Taillight -->
-      <rect x="415" y="228" width="38" height="16" rx="7" fill="#ff5252" opacity="0.9"/>
-      <!-- Wheels -->
-      <circle cx="155" cy="294" r="40" fill="#1a1a2e"/>
-      <circle cx="155" cy="294" r="30" fill="#263a5a"/>
-      <circle cx="155" cy="294" r="18" fill="#1a1a2e"/>
-      <circle cx="155" cy="294" r="10" fill="#3a5a80"/>
-      <!-- wheel spokes -->
-      <line x1="155" y1="276" x2="155" y2="264" stroke="#5a80aa" stroke-width="3"/>
-      <line x1="155" y1="312" x2="155" y2="324" stroke="#5a80aa" stroke-width="3"/>
-      <line x1="137" y1="294" x2="125" y2="294" stroke="#5a80aa" stroke-width="3"/>
-      <line x1="173" y1="294" x2="185" y2="294" stroke="#5a80aa" stroke-width="3"/>
-      <line x1="142" y1="281" x2="134" y2="273" stroke="#5a80aa" stroke-width="2"/>
-      <line x1="168" y1="307" x2="176" y2="315" stroke="#5a80aa" stroke-width="2"/>
-      <line x1="142" y1="307" x2="134" y2="315" stroke="#5a80aa" stroke-width="2"/>
-      <line x1="168" y1="281" x2="176" y2="273" stroke="#5a80aa" stroke-width="2"/>
-      <!-- Wheel 2 -->
-      <circle cx="375" cy="294" r="40" fill="#1a1a2e"/>
-      <circle cx="375" cy="294" r="30" fill="#263a5a"/>
-      <circle cx="375" cy="294" r="18" fill="#1a1a2e"/>
-      <circle cx="375" cy="294" r="10" fill="#3a5a80"/>
-      <line x1="375" y1="276" x2="375" y2="264" stroke="#5a80aa" stroke-width="3"/>
-      <line x1="375" y1="312" x2="375" y2="324" stroke="#5a80aa" stroke-width="3"/>
-      <line x1="357" y1="294" x2="345" y2="294" stroke="#5a80aa" stroke-width="3"/>
-      <line x1="393" y1="294" x2="405" y2="294" stroke="#5a80aa" stroke-width="3"/>
-      <line x1="362" y1="281" x2="354" y2="273" stroke="#5a80aa" stroke-width="2"/>
-      <line x1="388" y1="307" x2="396" y2="315" stroke="#5a80aa" stroke-width="2"/>
-      <line x1="362" y1="307" x2="354" y2="315" stroke="#5a80aa" stroke-width="2"/>
-      <line x1="388" y1="281" x2="396" y2="273" stroke="#5a80aa" stroke-width="2"/>
-      <!-- Water / soap splashes -->
-      <ellipse cx="100" cy="185" rx="18" ry="8" fill="rgba(26,175,255,0.5)" transform="rotate(-20,100,185)"/>
-      <ellipse cx="430" cy="200" rx="14" ry="6" fill="rgba(26,175,255,0.4)" transform="rotate(15,430,200)"/>
-      <circle cx="90" cy="170" r="5" fill="rgba(26,175,255,0.6)"/>
-      <circle cx="445" cy="188" r="4" fill="rgba(26,175,255,0.5)"/>
-      <circle cx="115" cy="160" r="3" fill="rgba(255,255,255,0.5)"/>
-      <circle cx="420" cy="170" r="3" fill="rgba(255,255,255,0.5)"/>
-      <!-- Soap bubbles floating -->
-      <circle cx="68" cy="140" r="10" fill="none" stroke="rgba(26,175,255,0.5)" stroke-width="2"/>
-      <circle cx="68" cy="140" r="4" fill="rgba(255,255,255,0.2)"/>
-      <circle cx="490" cy="155" r="8" fill="none" stroke="rgba(26,175,255,0.4)" stroke-width="2"/>
-      <circle cx="50" cy="100" r="14" fill="none" stroke="rgba(26,175,255,0.35)" stroke-width="2"/>
-      <circle cx="488" cy="110" r="11" fill="none" stroke="rgba(26,175,255,0.3)" stroke-width="2"/>
-      <!-- Shine stars on car -->
-      <text x="200" y="135" font-size="16" fill="#FFD93D" opacity="0.9">✦</text>
-      <text x="350" y="128" font-size="12" fill="#FFD93D" opacity="0.7">✦</text>
-      <text x="430" y="140" font-size="10" fill="#fff" opacity="0.6">✦</text>
-      <!-- Gradients -->
       <defs>
-        <linearGradient id="carGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(255,255,255,0.12)"/>
-          <stop offset="100%" stop-color="rgba(0,0,0,0.2)"/>
+        <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.10)"/>
+          <stop offset="100%" stop-color="rgba(0,0,0,0.25)"/>
         </linearGradient>
-        <linearGradient id="cabinGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
-          <stop offset="100%" stop-color="rgba(0,0,0,0.1)"/>
+        <linearGradient id="redGlow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#E8151B"/>
+          <stop offset="100%" stop-color="#a00"/>
         </linearGradient>
-        <linearGradient id="headlightGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#FFF9C4"/>
-          <stop offset="100%" stop-color="#FFE082"/>
-        </linearGradient>
+        <radialGradient id="groundGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(232,21,27,0.2)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
       </defs>
+      <!-- Ground glow -->
+      <ellipse cx="260" cy="308" rx="220" ry="18" fill="url(#groundGlow)"/>
+      <rect x="40" y="296" width="440" height="10" rx="5" fill="#111"/>
+      <!-- Road markings -->
+      <rect x="130" y="299" width="36" height="3" rx="1.5" fill="rgba(255,255,255,0.08)"/>
+      <rect x="230" y="299" width="36" height="3" rx="1.5" fill="rgba(255,255,255,0.08)"/>
+      <rect x="330" y="299" width="36" height="3" rx="1.5" fill="rgba(255,255,255,0.08)"/>
+      <!-- Car body -->
+      <rect x="58" y="222" width="404" height="76" rx="16" fill="#1a0000"/>
+      <rect x="58" y="222" width="404" height="76" rx="16" fill="url(#bodyGrad)"/>
+      <!-- Red accent stripe -->
+      <rect x="58" y="270" width="404" height="6" rx="0" fill="url(#redGlow)" opacity="0.7"/>
+      <!-- Cabin -->
+      <path d="M148 222 Q166 158 206 148 L336 148 Q374 148 388 166 L412 222 Z" fill="#200000"/>
+      <path d="M148 222 Q166 158 206 148 L336 148 Q374 148 388 166 L412 222 Z" fill="url(#bodyGrad)"/>
+      <!-- Windows -->
+      <path d="M172 216 Q182 170 212 160 L278 160 L278 216 Z" fill="#3a0000" opacity="0.9"/>
+      <path d="M286 160 L336 160 Q362 160 374 174 L392 216 L286 216 Z" fill="#3a0000" opacity="0.9"/>
+      <!-- Window tint shimmer -->
+      <path d="M190 168 Q215 163 232 170" stroke="rgba(232,21,27,0.3)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M300 164 Q322 161 342 168" stroke="rgba(232,21,27,0.25)" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <!-- Window divider -->
+      <rect x="281" y="159" width="4" height="57" rx="2" fill="#1a0000"/>
+      <!-- Front grill -->
+      <rect x="60" y="248" width="46" height="24" rx="6" fill="#0d0000"/>
+      <rect x="64" y="252" width="38" height="4" rx="2" fill="rgba(232,21,27,0.3)"/>
+      <rect x="64" y="260" width="38" height="4" rx="2" fill="rgba(232,21,27,0.3)"/>
+      <!-- Headlights -->
+      <rect x="62" y="228" width="44" height="16" rx="6" fill="#E8151B" opacity="0.9"/>
+      <rect x="62" y="228" width="44" height="16" rx="6" fill="url(#redGlow)" opacity="0.5"/>
+      <!-- Headlight glow -->
+      <ellipse cx="84" cy="236" rx="30" ry="10" fill="rgba(232,21,27,0.15)"/>
+      <!-- Taillights -->
+      <rect x="414" y="228" width="36" height="16" rx="6" fill="#E8151B" opacity="0.8"/>
+      <!-- Taillight glow -->
+      <ellipse cx="432" cy="236" rx="22" ry="8" fill="rgba(232,21,27,0.2)"/>
+      <!-- Door lines -->
+      <line x1="268" y1="224" x2="268" y2="296" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+      <!-- Wheels -->
+      <circle cx="152" cy="293" r="40" fill="#0a0a0a"/>
+      <circle cx="152" cy="293" r="30" fill="#161616"/>
+      <circle cx="152" cy="293" r="19" fill="#0a0a0a"/>
+      <circle cx="152" cy="293" r="10" fill="#E8151B" opacity="0.8"/>
+      <line x1="152" y1="274" x2="152" y2="263" stroke="#333" stroke-width="3.5"/>
+      <line x1="152" y1="312" x2="152" y2="323" stroke="#333" stroke-width="3.5"/>
+      <line x1="133" y1="293" x2="122" y2="293" stroke="#333" stroke-width="3.5"/>
+      <line x1="171" y1="293" x2="182" y2="293" stroke="#333" stroke-width="3.5"/>
+      <line x1="139" y1="280" x2="131" y2="272" stroke="#333" stroke-width="2.5"/>
+      <line x1="165" y1="306" x2="173" y2="314" stroke="#333" stroke-width="2.5"/>
+      <line x1="139" y1="306" x2="131" y2="314" stroke="#333" stroke-width="2.5"/>
+      <line x1="165" y1="280" x2="173" y2="272" stroke="#333" stroke-width="2.5"/>
+      <!-- Wheel 2 -->
+      <circle cx="372" cy="293" r="40" fill="#0a0a0a"/>
+      <circle cx="372" cy="293" r="30" fill="#161616"/>
+      <circle cx="372" cy="293" r="19" fill="#0a0a0a"/>
+      <circle cx="372" cy="293" r="10" fill="#E8151B" opacity="0.8"/>
+      <line x1="372" y1="274" x2="372" y2="263" stroke="#333" stroke-width="3.5"/>
+      <line x1="372" y1="312" x2="372" y2="323" stroke="#333" stroke-width="3.5"/>
+      <line x1="353" y1="293" x2="342" y2="293" stroke="#333" stroke-width="3.5"/>
+      <line x1="391" y1="293" x2="402" y2="293" stroke="#333" stroke-width="3.5"/>
+      <line x1="359" y1="280" x2="351" y2="272" stroke="#333" stroke-width="2.5"/>
+      <line x1="385" y1="306" x2="393" y2="314" stroke="#333" stroke-width="2.5"/>
+      <line x1="359" y1="306" x2="351" y2="314" stroke="#333" stroke-width="2.5"/>
+      <line x1="385" y1="280" x2="393" y2="272" stroke="#333" stroke-width="2.5"/>
+      <!-- Water splashes (red-tinted) -->
+      <ellipse cx="96" cy="183" rx="16" ry="7" fill="rgba(232,21,27,0.4)" transform="rotate(-20,96,183)"/>
+      <ellipse cx="432" cy="198" rx="12" ry="5" fill="rgba(232,21,27,0.35)" transform="rotate(15,432,198)"/>
+      <circle cx="82" cy="168" r="5" fill="rgba(232,21,27,0.5)"/>
+      <circle cx="446" cy="186" r="4" fill="rgba(232,21,27,0.45)"/>
+      <!-- Soap bubbles -->
+      <circle cx="66" cy="138" r="10" fill="none" stroke="rgba(232,21,27,0.4)" stroke-width="1.5"/>
+      <circle cx="490" cy="152" r="8" fill="none" stroke="rgba(232,21,27,0.3)" stroke-width="1.5"/>
+      <circle cx="48" cy="98" r="13" fill="none" stroke="rgba(232,21,27,0.25)" stroke-width="1.5"/>
+      <circle cx="488" cy="108" r="10" fill="none" stroke="rgba(232,21,27,0.2)" stroke-width="1.5"/>
+      <!-- Sparkle stars -->
+      <text x="198" y="134" font-size="14" fill="#E8151B" opacity="0.9">✦</text>
+      <text x="348" y="126" font-size="10" fill="#E8151B" opacity="0.7">✦</text>
+      <text x="428" y="138" font-size="8" fill="#fff" opacity="0.4">✦</text>
     </svg>
   </div>
 </section>
@@ -369,30 +376,10 @@
   <div class="section-title">How SplashGo Works</div>
   <div class="section-sub">Getting your car cleaned has never been this easy.</div>
   <div class="steps">
-    <div class="step-card">
-      <div class="step-num">01</div>
-      <div class="step-icon">📋</div>
-      <h3>Pick Your Package</h3>
-      <p>Choose from our range of services — from a quick exterior rinse to a full detailing job.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">02</div>
-      <div class="step-icon">📅</div>
-      <h3>Book a Time</h3>
-      <p>Select a date and time that works for you. We'll confirm your appointment right away.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">03</div>
-      <div class="step-icon">💳</div>
-      <h3>Pay a Deposit</h3>
-      <p>Secure your booking with a small $20 deposit. The rest is paid after the job is done.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">04</div>
-      <div class="step-icon">✨</div>
-      <h3>We Come to You</h3>
-      <p>Our team shows up at your location with all the gear. Sit back and enjoy a spotless car!</p>
-    </div>
+    <div class="step-card"><div class="step-num">01</div><div class="step-icon">📋</div><h3>Pick Your Package</h3><p>Choose from our range of services — from a quick exterior rinse to a full detailing job.</p></div>
+    <div class="step-card"><div class="step-num">02</div><div class="step-icon">📅</div><h3>Book a Time</h3><p>Select a date and time that works for you. We'll confirm your appointment right away.</p></div>
+    <div class="step-card"><div class="step-num">03</div><div class="step-icon">💳</div><h3>Pay a Deposit</h3><p>Secure your booking with a small $20 deposit. The rest is paid after the job is done.</p></div>
+    <div class="step-card"><div class="step-num">04</div><div class="step-icon">✨</div><h3>We Come to You</h3><p>Our team shows up at your location with all the gear. Sit back and enjoy a spotless car!</p></div>
   </div>
 </section>
 
@@ -400,196 +387,160 @@
 <section id="gallery">
   <div class="section-label">Our Work</div>
   <div class="section-title">Results That Speak</div>
-  <div class="section-sub">From dusty to dazzling — here's what we do.</div>
+  <div class="section-sub">From dusty to dazzling.</div>
   <div class="gallery-grid">
-
-    <!-- Large: hand washing scene -->
     <div class="gallery-item">
-      <svg viewBox="0 0 400 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-        <rect width="400" height="440" fill="#0d2040"/>
-        <rect width="400" height="440" fill="url(#g1)"/>
-        <!-- Car body -->
-        <rect x="20" y="230" width="360" height="85" rx="16" fill="#1565c0"/>
-        <path d="M90 230 Q105 175 135 165 L285 165 Q315 165 325 182 L345 230 Z" fill="#1976d2"/>
-        <path d="M108 225 Q116 178 138 170 L200 170 L200 225 Z" fill="#7ecfff" opacity="0.8"/>
-        <path d="M210 170 L278 170 Q300 170 312 184 L326 225 L210 225 Z" fill="#7ecfff" opacity="0.8"/>
-        <rect x="203" y="169" width="5" height="56" rx="2" fill="#1565c0"/>
-        <circle cx="100" cy="314" r="36" fill="#1a1a2e"/><circle cx="100" cy="314" r="26" fill="#263a5a"/><circle cx="100" cy="314" r="14" fill="#1a1a2e"/>
-        <circle cx="320" cy="314" r="36" fill="#1a1a2e"/><circle cx="320" cy="314" r="26" fill="#263a5a"/><circle cx="320" cy="314" r="14" fill="#1a1a2e"/>
-        <!-- Person washing -->
-        <circle cx="58" cy="190" r="18" fill="#FFCC80"/><!-- head -->
-        <rect x="44" y="208" width="28" height="45" rx="8" fill="#1AAFFF"/><!-- body -->
-        <rect x="66" y="215" width="38" height="12" rx="6" fill="#FFCC80"/><!-- arm -->
-        <!-- Sponge/mitt -->
-        <rect x="100" y="218" width="22" height="16" rx="8" fill="#FFD93D"/>
-        <!-- Soap water splashes -->
-        <ellipse cx="125" cy="225" rx="15" ry="7" fill="rgba(26,175,255,0.6)" transform="rotate(-15,125,225)"/>
-        <ellipse cx="140" cy="212" rx="10" ry="5" fill="rgba(26,175,255,0.5)" transform="rotate(10,140,212)"/>
-        <circle cx="115" cy="208" r="4" fill="rgba(255,255,255,0.6)"/>
-        <circle cx="148" cy="200" r="3" fill="rgba(26,175,255,0.7)"/>
-        <circle cx="88" cy="195" r="5" fill="none" stroke="rgba(26,175,255,0.6)" stroke-width="2"/>
-        <circle cx="70" cy="160" r="8" fill="none" stroke="rgba(26,175,255,0.5)" stroke-width="2"/>
-        <circle cx="50" cy="140" r="11" fill="none" stroke="rgba(26,175,255,0.4)" stroke-width="2"/>
-        <!-- Shine stars -->
-        <text x="280" y="155" font-size="18" fill="#FFD93D">✦</text>
-        <text x="355" y="200" font-size="12" fill="#FFD93D">✦</text>
-        <text x="20" y="120" font-size="10" fill="white" opacity="0.7">✦</text>
+      <svg viewBox="0 0 400 460" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+        <rect width="400" height="460" fill="#080808"/>
+        <rect width="400" height="460" fill="url(#gg1)"/>
+        <rect x="18" y="240" width="364" height="80" rx="14" fill="#1a0000"/>
+        <path d="M68 240 Q82 192 108 184 L302 184 Q328 184 338 200 L358 240 Z" fill="#200000"/>
+        <path d="M84 236 Q90 196 108 188 L190 188 L190 236 Z" fill="#5a1010" opacity="0.8"/>
+        <path d="M198 188 L295 188 Q316 188 326 202 L340 236 L198 236 Z" fill="#5a1010" opacity="0.8"/>
+        <rect x="192" y="187" width="4" height="49" rx="2" fill="#1a0000"/>
+        <!-- red accent stripe -->
+        <rect x="18" y="292" width="364" height="5" rx="0" fill="#E8151B" opacity="0.6"/>
+        <circle cx="58" cy="320" r="32" fill="#0a0a0a"/><circle cx="58" cy="320" r="20" fill="#1a0000"/><circle cx="58" cy="320" r="10" fill="#E8151B" opacity="0.7"/>
+        <circle cx="340" cy="320" r="32" fill="#0a0a0a"/><circle cx="340" cy="320" r="20" fill="#1a0000"/><circle cx="340" cy="320" r="10" fill="#E8151B" opacity="0.7"/>
+        <!-- Person -->
+        <circle cx="410" cy="195" r="16" fill="#FFCC80"/>
+        <rect x="397" y="211" width="26" height="40" rx="7" fill="#E8151B"/>
+        <rect x="374" y="218" width="36" height="11" rx="5" fill="#FFCC80"/>
+        <!-- Mitt/sponge -->
+        <rect x="346" y="220" width="20" height="14" rx="7" fill="#FFD93D"/>
+        <!-- Water splashes -->
+        <ellipse cx="328" cy="226" rx="14" ry="6" fill="rgba(232,21,27,0.5)" transform="rotate(-12,328,226)"/>
+        <ellipse cx="315" cy="214" rx="9" ry="4" fill="rgba(232,21,27,0.4)"/>
+        <circle cx="320" cy="205" r="4" fill="rgba(255,100,100,0.6)"/>
+        <circle cx="305" cy="210" r="3" fill="rgba(232,21,27,0.5)"/>
+        <!-- Bubbles -->
+        <circle cx="380" cy="160" r="9" fill="none" stroke="rgba(232,21,27,0.5)" stroke-width="1.5"/>
+        <circle cx="355" cy="135" r="12" fill="none" stroke="rgba(232,21,27,0.4)" stroke-width="1.5"/>
+        <circle cx="385" cy="118" r="7" fill="none" stroke="rgba(232,21,27,0.3)" stroke-width="1.5"/>
+        <!-- Sparkles -->
+        <text x="60" y="155" font-size="16" fill="#E8151B">✦</text>
+        <text x="290" y="165" font-size="12" fill="#E8151B" opacity="0.8">✦</text>
         <!-- Label -->
-        <rect x="20" y="390" width="200" height="36" rx="10" fill="rgba(26,175,255,0.2)"/>
-        <text x="32" y="413" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#7ecfff">Hand Wash Service</text>
-        <defs>
-          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="rgba(26,175,255,0.12)"/>
-            <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
-          </linearGradient>
-        </defs>
+        <rect x="18" y="410" width="190" height="30" rx="2" fill="rgba(232,21,27,0.15)" stroke="rgba(232,21,27,0.3)" stroke-width="1"/>
+        <text x="28" y="430" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#E8151B" letter-spacing="1">HAND WASH SERVICE</text>
+        <defs><linearGradient id="gg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(232,21,27,0.08)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/></linearGradient></defs>
       </svg>
     </div>
-
-    <!-- Shiny car top-down -->
     <div class="gallery-item">
-      <svg viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-        <rect width="280" height="220" fill="#071428"/>
-        <rect x="0" y="170" width="280" height="50" fill="#0a1e38"/>
-        <!-- Clean shiny car -->
-        <rect x="30" y="100" width="220" height="60" rx="14" fill="#1565c0"/>
-        <path d="M75 100 Q88 65 108 58 L182 58 Q200 58 208 72 L220 100 Z" fill="#1976d2"/>
-        <path d="M88 96 Q94 68 110 62 L148 62 L148 96 Z" fill="#a8e6ff" opacity="0.8"/>
-        <path d="M156 62 L180 62 Q196 62 205 74 L216 96 L156 96 Z" fill="#a8e6ff" opacity="0.8"/>
-        <circle cx="72" cy="158" r="24" fill="#1a1a2e"/><circle cx="72" cy="158" r="16" fill="#263a5a"/><circle cx="72" cy="158" r="8" fill="#1a1a2e"/>
-        <circle cx="208" cy="158" r="24" fill="#1a1a2e"/><circle cx="208" cy="158" r="16" fill="#263a5a"/><circle cx="208" cy="158" r="8" fill="#1a1a2e"/>
-        <!-- shine effect on car -->
-        <path d="M110 72 Q140 65 170 72" stroke="rgba(255,255,255,0.5)" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <path d="M95 85 Q120 80 145 85" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <!-- sparkles -->
-        <text x="20" y="50" font-size="22" fill="#FFD93D">✦</text>
-        <text x="230" y="45" font-size="16" fill="#FFD93D">✦</text>
-        <text x="130" y="35" font-size="12" fill="white" opacity="0.8">✦</text>
-        <!-- Label -->
-        <rect x="10" y="185" width="160" height="24" rx="8" fill="rgba(26,175,255,0.25)"/>
-        <text x="20" y="202" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#7ecfff">Spotless Finish</text>
+      <svg viewBox="0 0 280 230" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+        <rect width="280" height="230" fill="#080808"/>
+        <rect x="22" y="108" width="236" height="68" rx="13" fill="#1a0000"/>
+        <path d="M58 108 Q68 72 86 66 L202 66 Q220 66 227 78 L244 108 Z" fill="#220000"/>
+        <path d="M68 104 Q74 74 87 68 L136 68 L136 104 Z" fill="#5a1010" opacity="0.85"/>
+        <path d="M143 68 L198 68 Q213 68 220 79 L232 104 L143 104 Z" fill="#5a1010" opacity="0.85"/>
+        <rect x="138" y="67" width="3.5" height="37" rx="1.5" fill="#1a0000"/>
+        <rect x="22" y="150" width="236" height="4" rx="0" fill="#E8151B" opacity="0.5"/>
+        <circle cx="58" cy="174" r="22" fill="#0a0a0a"/><circle cx="58" cy="174" r="14" fill="#1a0000"/><circle cx="58" cy="174" r="7" fill="#E8151B" opacity="0.7"/>
+        <circle cx="222" cy="174" r="22" fill="#0a0a0a"/><circle cx="222" cy="174" r="14" fill="#1a0000"/><circle cx="222" cy="174" r="7" fill="#E8151B" opacity="0.7"/>
+        <path d="M88 78 Q138 70 188 78" stroke="rgba(232,21,27,0.5)" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M78 90 Q118 84 158 90" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <text x="16" y="48" font-size="20" fill="#E8151B">✦</text>
+        <text x="238" y="45" font-size="14" fill="#E8151B" opacity="0.8">✦</text>
+        <text x="126" y="36" font-size="11" fill="white" opacity="0.5">✦</text>
+        <rect x="14" y="200" width="150" height="22" rx="2" fill="rgba(232,21,27,0.15)" stroke="rgba(232,21,27,0.3)" stroke-width="1"/>
+        <text x="22" y="216" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#E8151B" letter-spacing="1">SPOTLESS FINISH</text>
       </svg>
     </div>
-
-    <!-- Tire/wheel cleaning -->
     <div class="gallery-item">
-      <svg viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-        <rect width="280" height="220" fill="#071020"/>
-        <!-- Big wheel close-up -->
-        <circle cx="140" cy="130" r="95" fill="#111"/>
-        <circle cx="140" cy="130" r="75" fill="#1a2a40"/>
-        <circle cx="140" cy="130" r="55" fill="#0d1a2e"/>
-        <circle cx="140" cy="130" r="32" fill="#263a5a"/>
-        <circle cx="140" cy="130" r="18" fill="#1a1a2e"/>
-        <circle cx="140" cy="130" r="8" fill="#3a5a80"/>
-        <!-- spokes -->
-        <line x1="140" y1="75" x2="140" y2="98" stroke="#4a7aa0" stroke-width="5" stroke-linecap="round"/>
-        <line x1="140" y1="162" x2="140" y2="185" stroke="#4a7aa0" stroke-width="5" stroke-linecap="round"/>
-        <line x1="85" y1="130" x2="108" y2="130" stroke="#4a7aa0" stroke-width="5" stroke-linecap="round"/>
-        <line x1="172" y1="130" x2="195" y2="130" stroke="#4a7aa0" stroke-width="5" stroke-linecap="round"/>
-        <line x1="101" y1="91" x2="118" y2="108" stroke="#4a7aa0" stroke-width="4" stroke-linecap="round"/>
-        <line x1="162" y1="152" x2="179" y2="169" stroke="#4a7aa0" stroke-width="4" stroke-linecap="round"/>
-        <line x1="101" y1="169" x2="118" y2="152" stroke="#4a7aa0" stroke-width="4" stroke-linecap="round"/>
-        <line x1="162" y1="108" x2="179" y2="91" stroke="#4a7aa0" stroke-width="4" stroke-linecap="round"/>
-        <!-- brush cleaning -->
-        <rect x="210" y="60" width="12" height="50" rx="4" fill="#8D6E63"/>
-        <rect x="204" y="108" width="24" height="16" rx="4" fill="#FFCC02"/>
-        <!-- water drips -->
-        <ellipse cx="195" cy="128" rx="12" ry="5" fill="rgba(26,175,255,0.6)"/>
-        <circle cx="188" cy="118" r="3" fill="rgba(26,175,255,0.7)"/>
-        <circle cx="200" cy="112" r="4" fill="rgba(255,255,255,0.5)"/>
-        <!-- tire shine glow -->
-        <circle cx="140" cy="130" r="95" fill="none" stroke="rgba(26,175,255,0.15)" stroke-width="3"/>
-        <!-- Label -->
-        <rect x="10" y="192" width="155" height="22" rx="8" fill="rgba(26,175,255,0.25)"/>
-        <text x="18" y="208" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#7ecfff">Wheel & Tire Detail</text>
+      <svg viewBox="0 0 280 230" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+        <rect width="280" height="230" fill="#050505"/>
+        <circle cx="140" cy="128" r="98" fill="#0a0a0a"/>
+        <circle cx="140" cy="128" r="78" fill="#141414"/>
+        <circle cx="140" cy="128" r="56" fill="#0a0a0a"/>
+        <circle cx="140" cy="128" r="33" fill="#1a1a1a"/>
+        <circle cx="140" cy="128" r="18" fill="#0a0a0a"/>
+        <circle cx="140" cy="128" r="9" fill="#E8151B" opacity="0.9"/>
+        <line x1="140" y1="72" x2="140" y2="95" stroke="#2a2a2a" stroke-width="6" stroke-linecap="round"/>
+        <line x1="140" y1="161" x2="140" y2="184" stroke="#2a2a2a" stroke-width="6" stroke-linecap="round"/>
+        <line x1="84" y1="128" x2="107" y2="128" stroke="#2a2a2a" stroke-width="6" stroke-linecap="round"/>
+        <line x1="173" y1="128" x2="196" y2="128" stroke="#2a2a2a" stroke-width="6" stroke-linecap="round"/>
+        <line x1="100" y1="88" x2="118" y2="106" stroke="#2a2a2a" stroke-width="4.5" stroke-linecap="round"/>
+        <line x1="162" y1="150" x2="180" y2="168" stroke="#2a2a2a" stroke-width="4.5" stroke-linecap="round"/>
+        <line x1="100" y1="168" x2="118" y2="150" stroke="#2a2a2a" stroke-width="4.5" stroke-linecap="round"/>
+        <line x1="162" y1="106" x2="180" y2="88" stroke="#2a2a2a" stroke-width="4.5" stroke-linecap="round"/>
+        <!-- Brush -->
+        <rect x="210" y="58" width="11" height="46" rx="3.5" fill="#5D4037"/>
+        <rect x="204" y="103" width="23" height="15" rx="4" fill="#FFD93D"/>
+        <ellipse cx="194" cy="120" rx="11" ry="5" fill="rgba(232,21,27,0.6)"/>
+        <circle cx="184" cy="112" r="3" fill="rgba(232,21,27,0.7)"/>
+        <circle cx="200" cy="108" r="3.5" fill="rgba(255,100,100,0.5)"/>
+        <!-- Red glow ring -->
+        <circle cx="140" cy="128" r="98" fill="none" stroke="rgba(232,21,27,0.12)" stroke-width="3"/>
+        <rect x="14" y="200" width="180" height="22" rx="2" fill="rgba(232,21,27,0.15)" stroke="rgba(232,21,27,0.3)" stroke-width="1"/>
+        <text x="22" y="216" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#E8151B" letter-spacing="1">WHEEL & TIRE DETAIL</text>
       </svg>
     </div>
-
-    <!-- Interior clean -->
     <div class="gallery-item">
-      <svg viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-        <rect width="280" height="220" fill="#0a1628"/>
-        <!-- Car interior view -->
-        <!-- Seats -->
-        <rect x="20" y="80" width="105" height="100" rx="12" fill="#1a3460"/>
-        <rect x="25" y="85" width="95" height="60" rx="10" fill="#1e3d70"/>
-        <rect x="25" y="148" width="95" height="22" rx="8" fill="#1e3d70"/>
-        <rect x="155" y="80" width="105" height="100" rx="12" fill="#1a3460"/>
-        <rect x="160" y="85" width="95" height="60" rx="10" fill="#1e3d70"/>
-        <rect x="160" y="148" width="95" height="22" rx="8" fill="#1e3d70"/>
-        <!-- Seat shine lines -->
-        <path d="M35 95 Q72 90 110 95" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none"/>
-        <path d="M170 95 Q207 90 245 95" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none"/>
-        <!-- Center console -->
-        <rect x="115" y="110" width="50" height="70" rx="10" fill="#0d1e38"/>
-        <rect x="120" y="120" width="40" height="20" rx="6" fill="#152540"/>
-        <circle cx="140" cy="155" r="10" fill="#1AAFFF" opacity="0.6"/>
-        <!-- Dashboard suggestion at top -->
-        <rect x="10" y="30" width="260" height="45" rx="10" fill="#0d1e38"/>
-        <rect x="80" y="38" width="120" height="28" rx="8" fill="#152540"/>
-        <circle cx="50" cy="52" r="16" fill="#111" stroke="#263a5a" stroke-width="3"/>
-        <circle cx="230" cy="52" r="16" fill="#111" stroke="#263a5a" stroke-width="3"/>
-        <!-- Vacuum cleaner nozzle -->
-        <rect x="200" y="155" width="60" height="10" rx="5" fill="#888"/>
-        <rect x="245" y="140" width="10" height="30" rx="4" fill="#666"/>
-        <ellipse cx="200" cy="160" rx="14" ry="8" fill="#777"/>
-        <!-- Dust/dirt particles being sucked -->
-        <circle cx="190" cy="155" r="3" fill="rgba(200,160,80,0.6)"/>
-        <circle cx="178" cy="148" r="2" fill="rgba(200,160,80,0.5)"/>
-        <circle cx="185" cy="142" r="2" fill="rgba(200,160,80,0.4)"/>
-        <!-- Stars/clean glow -->
-        <text x="30" y="72" font-size="12" fill="#FFD93D" opacity="0.8">✦</text>
-        <text x="240" y="75" font-size="10" fill="#FFD93D" opacity="0.7">✦</text>
-        <!-- Label -->
-        <rect x="10" y="192" width="155" height="22" rx="8" fill="rgba(26,175,255,0.25)"/>
-        <text x="18" y="208" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#7ecfff">Interior Detailing</text>
+      <svg viewBox="0 0 280 230" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+        <rect width="280" height="230" fill="#080808"/>
+        <!-- Interior -->
+        <rect x="18" y="72" width="110" height="110" rx="10" fill="#180000"/>
+        <rect x="22" y="76" width="102" height="66" rx="9" fill="#200000"/>
+        <rect x="22" y="145" width="102" height="24" rx="7" fill="#200000"/>
+        <rect x="152" y="72" width="110" height="110" rx="10" fill="#180000"/>
+        <rect x="156" y="76" width="102" height="66" rx="9" fill="#200000"/>
+        <rect x="156" y="145" width="102" height="24" rx="7" fill="#200000"/>
+        <path d="M30 83 Q72 78 120 83" stroke="rgba(232,21,27,0.15)" stroke-width="1.5" fill="none"/>
+        <path d="M163 83 Q205 78 253 83" stroke="rgba(232,21,27,0.15)" stroke-width="1.5" fill="none"/>
+        <rect x="118" y="102" width="44" height="80" rx="9" fill="#100000"/>
+        <rect x="122" y="112" width="36" height="20" rx="5" fill="#1a0000"/>
+        <circle cx="140" cy="155" r="9" fill="#E8151B" opacity="0.5"/>
+        <!-- Dashboard -->
+        <rect x="8" y="25" width="264" height="42" rx="8" fill="#100000"/>
+        <rect x="76" y="32" width="128" height="28" rx="6" fill="#1a0000"/>
+        <circle cx="44" cy="46" r="15" fill="#080808" stroke="#1a0000" stroke-width="2.5"/>
+        <circle cx="236" cy="46" r="15" fill="#080808" stroke="#1a0000" stroke-width="2.5"/>
+        <!-- Vacuum -->
+        <rect x="196" y="148" width="62" height="9" rx="4" fill="#555"/>
+        <rect x="242" y="132" width="10" height="28" rx="3.5" fill="#444"/>
+        <ellipse cx="196" cy="152" rx="13" ry="7" fill="#666"/>
+        <!-- Dust particles -->
+        <circle cx="183" cy="147" r="3" fill="rgba(180,120,60,0.6)"/>
+        <circle cx="173" cy="140" r="2" fill="rgba(180,120,60,0.5)"/>
+        <circle cx="179" cy="134" r="2" fill="rgba(180,120,60,0.4)"/>
+        <text x="22" y="65" font-size="11" fill="#E8151B" opacity="0.8">✦</text>
+        <text x="248" y="68" font-size="9" fill="#E8151B" opacity="0.7">✦</text>
+        <rect x="14" y="200" width="152" height="22" rx="2" fill="rgba(232,21,27,0.15)" stroke="rgba(232,21,27,0.3)" stroke-width="1"/>
+        <text x="22" y="216" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#E8151B" letter-spacing="1">INTERIOR DETAILING</text>
       </svg>
     </div>
-
-    <!-- Before/after -->
     <div class="gallery-item">
-      <svg viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-        <rect width="280" height="220" fill="#071020"/>
-        <!-- Before side (left, dirty) -->
-        <rect x="0" y="0" width="140" height="220" fill="#121c2a"/>
-        <!-- dirty car left -->
-        <rect x="10" y="110" width="120" height="55" rx="10" fill="#2a3a50"/>
-        <path d="M30 110 Q38 80 52 74 L115 74 Q125 74 130 83 L138 110 Z" fill="#344a62"/>
-        <path d="M38 106 Q43 82 54 77 L82 77 L82 106 Z" fill="#7aaccc" opacity="0.6"/>
-        <path d="M88 77 L112 77 Q122 77 128 87 L136 106 L88 106 Z" fill="#7aaccc" opacity="0.6"/>
-        <!-- dirt patches -->
-        <ellipse cx="60" cy="120" rx="12" ry="6" fill="rgba(80,50,20,0.5)" transform="rotate(-10,60,120)"/>
-        <ellipse cx="110" cy="115" rx="8" ry="4" fill="rgba(80,50,20,0.4)"/>
-        <ellipse cx="85" cy="130" rx="10" ry="5" fill="rgba(80,50,20,0.45)"/>
-        <circle cx="45" cy="90" r="5" fill="rgba(80,50,20,0.4)"/>
-        <circle cx="55" cy="164" r="20" fill="#111"/><circle cx="55" cy="164" r="12" fill="#1a2230"/>
-        <circle cx="115" cy="164" r="20" fill="#111"/><circle cx="115" cy="164" r="12" fill="#1a2230"/>
-        <text x="42" y="200" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#ff7070">BEFORE</text>
-
-        <!-- Divider -->
-        <rect x="136" y="0" width="8" height="220" fill="#FFD93D"/>
-        <polygon points="140,95 148,110 132,110" fill="#FFD93D"/>
-
-        <!-- After side (right, clean) -->
-        <rect x="144" y="0" width="136" height="220" fill="#071428"/>
-        <!-- clean car right -->
-        <rect x="150" y="110" width="120" height="55" rx="10" fill="#1565c0"/>
-        <path d="M170 110 Q178 80 192 74 L255 74 Q265 74 270 83 L278 110 Z" fill="#1976d2"/>
-        <path d="M178 106 Q183 82 194 77 L222 77 L222 106 Z" fill="#a8e6ff" opacity="0.85"/>
-        <path d="M228 77 L252 77 Q262 77 268 87 L276 106 L228 106 Z" fill="#a8e6ff" opacity="0.85"/>
-        <!-- shine lines -->
-        <path d="M192 84 Q215 79 238 84" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <circle cx="195" cy="164" r="20" fill="#1a1a2e"/><circle cx="195" cy="164" r="12" fill="#263a5a"/>
-        <circle cx="255" cy="164" r="20" fill="#1a1a2e"/><circle cx="255" cy="164" r="12" fill="#263a5a"/>
-        <!-- sparkles -->
-        <text x="150" y="55" font-size="16" fill="#FFD93D">✦</text>
-        <text x="255" y="60" font-size="12" fill="#FFD93D">✦</text>
-        <text x="215" y="45" font-size="10" fill="white">✦</text>
-        <text x="162" y="200" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#3DDC84">AFTER</text>
+      <svg viewBox="0 0 280 230" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+        <rect width="280" height="230" fill="#060606"/>
+        <!-- Before -->
+        <rect x="0" y="0" width="138" height="230" fill="#0c0c0c"/>
+        <rect x="8" y="108" width="122" height="58" rx="10" fill="#1c1c1c"/>
+        <path d="M24 108 Q32 78 46 72 L112 72 Q124 72 130 82 L138 108 Z" fill="#242424"/>
+        <path d="M32 104 Q37 80 47 74 L78 74 L78 104 Z" fill="#555" opacity="0.6"/>
+        <path d="M84 74 L110 74 Q120 74 126 84 L134 104 L84 104 Z" fill="#555" opacity="0.6"/>
+        <ellipse cx="52" cy="118" rx="11" ry="5" fill="rgba(80,50,10,0.55)" transform="rotate(-10,52,118)"/>
+        <ellipse cx="100" cy="114" rx="8" ry="4" fill="rgba(80,50,10,0.45)"/>
+        <ellipse cx="78" cy="128" rx="9" ry="4" fill="rgba(80,50,10,0.5)"/>
+        <circle cx="40" cy="165" r="18" fill="#111"/><circle cx="40" cy="165" r="11" fill="#1a1a1a"/>
+        <circle cx="110" cy="165" r="18" fill="#111"/><circle cx="110" cy="165" r="11" fill="#1a1a1a"/>
+        <text x="36" y="206" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#ff4444" letter-spacing="1">BEFORE</text>
+        <!-- Divider arrow -->
+        <rect x="134" y="0" width="12" height="230" fill="#E8151B"/>
+        <polygon points="140,100 150,115 130,115" fill="#fff"/>
+        <!-- After -->
+        <rect x="146" y="0" width="134" height="230" fill="#080808"/>
+        <rect x="152" y="108" width="122" height="58" rx="10" fill="#1a0000"/>
+        <path d="M168 108 Q176 78 190 72 L256 72 Q268 72 274 82 L282 108 Z" fill="#220000"/>
+        <path d="M176 104 Q181 80 191 74 L222 74 L222 104 Z" fill="#5a1010" opacity="0.85"/>
+        <path d="M228 74 L254 74 Q264 74 270 84 L278 104 L228 104 Z" fill="#5a1010" opacity="0.85"/>
+        <path d="M192 82 Q222 75 252 82" stroke="rgba(232,21,27,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="184" cy="165" r="18" fill="#0a0a0a"/><circle cx="184" cy="165" r="11" fill="#1a0000"/><circle cx="184" cy="165" r="5" fill="#E8151B" opacity="0.8"/>
+        <circle cx="254" cy="165" r="18" fill="#0a0a0a"/><circle cx="254" cy="165" r="11" fill="#1a0000"/><circle cx="254" cy="165" r="5" fill="#E8151B" opacity="0.8"/>
+        <text x="152" y="82" font-size="14" fill="#E8151B">✦</text>
+        <text x="256" y="78" font-size="10" fill="#E8151B" opacity="0.8">✦</text>
+        <text x="180" y="200" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#3DDC84" letter-spacing="1">AFTER</text>
       </svg>
     </div>
-
   </div>
 </section>
 
@@ -600,190 +551,138 @@
   <div class="section-sub">All packages include eco-friendly products, done right at your doorstep anywhere in the GTA.</div>
   <div class="services-grid">
 
-    <!-- Basic Wash -->
     <div class="service-card">
-      <svg class="service-thumb" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="160" fill="#071428"/>
-        <rect width="400" height="160" fill="url(#sg1)"/>
-        <rect x="60" y="80" width="280" height="55" rx="12" fill="#1565c0"/>
-        <path d="M110 80 Q120 52 138 46 L278 46 Q295 46 302 58 L318 80 Z" fill="#1976d2"/>
-        <path d="M122 76 Q128 55 140 50 L186 50 L186 76 Z" fill="#7ecfff" opacity="0.8"/>
-        <path d="M193 50 L270 50 Q283 50 290 60 L304 76 L193 76 Z" fill="#7ecfff" opacity="0.8"/>
-        <circle cx="110" cy="134" r="28" fill="#1a1a2e"/><circle cx="110" cy="134" r="18" fill="#263a5a"/>
-        <circle cx="300" cy="134" r="28" fill="#1a1a2e"/><circle cx="300" cy="134" r="18" fill="#263a5a"/>
-        <!-- water sprayer -->
-        <rect x="22" y="55" width="8" height="35" rx="3" fill="#888"/>
-        <rect x="10" y="53" width="22" height="8" rx="3" fill="#aaa"/>
-        <ellipse cx="10" cy="57" rx="5" ry="8" fill="#999"/>
-        <!-- water spray lines -->
-        <line x1="8" y1="50" x2="45" y2="42" stroke="rgba(26,175,255,0.7)" stroke-width="2"/>
-        <line x1="8" y1="57" x2="50" y2="55" stroke="rgba(26,175,255,0.8)" stroke-width="2.5"/>
-        <line x1="8" y1="64" x2="46" y2="70" stroke="rgba(26,175,255,0.7)" stroke-width="2"/>
-        <circle cx="48" cy="42" r="3" fill="rgba(26,175,255,0.6)"/>
-        <circle cx="53" cy="55" r="4" fill="rgba(26,175,255,0.7)"/>
-        <circle cx="49" cy="70" r="3" fill="rgba(26,175,255,0.6)"/>
-        <text x="310" y="42" font-size="14" fill="#FFD93D">✦</text>
-        <text x="340" y="60" font-size="10" fill="#FFD93D">✦</text>
-        <defs><linearGradient id="sg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(26,175,255,0.1)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/></linearGradient></defs>
+      <svg class="service-thumb" viewBox="0 0 400 155" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="155" fill="#080808"/>
+        <rect x="58" y="72" width="284" height="58" rx="12" fill="#1a0000"/>
+        <path d="M108 72 Q118 44 136 38 L276 38 Q294 38 302 50 L318 72 Z" fill="#220000"/>
+        <path d="M120 68 Q126 46 138 40 L184 40 L184 68 Z" fill="#5a1010" opacity="0.8"/>
+        <path d="M190 40 L268 40 Q282 40 289 52 L304 68 L190 68 Z" fill="#5a1010" opacity="0.8"/>
+        <circle cx="108" cy="128" r="26" fill="#0a0a0a"/><circle cx="108" cy="128" r="16" fill="#1a0000"/>
+        <circle cx="300" cy="128" r="26" fill="#0a0a0a"/><circle cx="300" cy="128" r="16" fill="#1a0000"/>
+        <rect x="20" y="52" width="7" height="32" rx="3" fill="#666"/>
+        <rect x="9" y="50" width="20" height="7" rx="3" fill="#888"/>
+        <line x1="8" y1="47" x2="43" y2="39" stroke="rgba(232,21,27,0.7)" stroke-width="2"/>
+        <line x1="8" y1="53" x2="46" y2="52" stroke="rgba(232,21,27,0.85)" stroke-width="2.5"/>
+        <line x1="8" y1="60" x2="43" y2="67" stroke="rgba(232,21,27,0.7)" stroke-width="2"/>
+        <circle cx="46" cy="39" r="3" fill="rgba(232,21,27,0.7)"/>
+        <circle cx="49" cy="52" r="4" fill="rgba(232,21,27,0.8)"/>
+        <circle cx="46" cy="67" r="3" fill="rgba(232,21,27,0.7)"/>
+        <text x="318" y="34" font-size="13" fill="#E8151B">✦</text>
+        <text x="348" y="52" font-size="9" fill="#E8151B" opacity="0.7">✦</text>
       </svg>
       <div class="service-header">
-        <div class="service-name">🚿 Basic Wash</div>
-        <div class="service-desc">A thorough exterior wash to get rid of everyday dust, dirt, and grime.</div>
+        <div class="service-name">Basic Wash</div>
+        <div class="service-desc">Thorough exterior wash to get rid of everyday dust, dirt, and grime.</div>
       </div>
       <ul class="service-features">
-        <li>Exterior hand wash & rinse</li>
-        <li>Wheel & tire cleaning</li>
-        <li>Window exterior wipe</li>
-        <li>Quick interior vacuum</li>
-        <li>Air freshener</li>
+        <li>Exterior hand wash & rinse</li><li>Wheel & tire cleaning</li>
+        <li>Window exterior wipe</li><li>Quick interior vacuum</li><li>Air freshener</li>
       </ul>
       <div class="service-footer">
-        <div class="service-price">
-          <span class="price-from">Starting from</span>
-          <span class="price-amount">$45</span>
-          <span class="price-unit">+ tax</span>
-        </div>
+        <div><span class="price-from">Starting from</span><span class="price-amount">$45</span><span class="price-unit"> + tax</span></div>
         <button class="book-btn" onclick="openBooking('Basic Wash')">Book Now</button>
       </div>
     </div>
 
-    <!-- Signature Wash -->
     <div class="service-card popular">
-      <svg class="service-thumb" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="160" fill="#071428"/>
-        <rect width="400" height="160" fill="url(#sg2)"/>
-        <!-- Clean shiny car -->
-        <rect x="55" y="80" width="290" height="58" rx="14" fill="#0d47a1"/>
-        <path d="M105 80 Q118 50 138 43 L275 43 Q295 43 304 57 L322 80 Z" fill="#1565c0"/>
-        <path d="M118 76 Q125 53 140 47 L188 47 L188 76 Z" fill="#bbdefb" opacity="0.9"/>
-        <path d="M196 47 L268 47 Q285 47 294 59 L308 76 L196 76 Z" fill="#bbdefb" opacity="0.9"/>
-        <circle cx="108" cy="136" r="30" fill="#1a1a2e"/><circle cx="108" cy="136" r="20" fill="#263a5a"/><circle cx="108" cy="136" r="10" fill="#1a1a2e"/>
-        <circle cx="302" cy="136" r="30" fill="#1a1a2e"/><circle cx="302" cy="136" r="20" fill="#263a5a"/><circle cx="302" cy="136" r="10" fill="#1a1a2e"/>
-        <!-- Big shine stripes -->
-        <path d="M138 56 Q190 48 242 56" stroke="rgba(255,255,255,0.6)" stroke-width="4" fill="none" stroke-linecap="round"/>
-        <path d="M125 68 Q170 62 215 68" stroke="rgba(255,255,255,0.35)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <!-- sparkles -->
-        <text x="20" y="38" font-size="20" fill="#FFD93D">✦</text>
-        <text x="355" y="40" font-size="16" fill="#FFD93D">✦</text>
-        <text x="185" y="28" font-size="14" fill="white" opacity="0.9">✦</text>
-        <text x="335" y="70" font-size="10" fill="#FFD93D">✦</text>
-        <defs><linearGradient id="sg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(13,71,161,0.4)"/><stop offset="100%" stop-color="rgba(0,0,0,0.2)"/></linearGradient></defs>
+      <div class="popular-badge">⭐ Most Popular</div>
+      <svg class="service-thumb" viewBox="0 0 400 155" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="155" fill="#080808"/>
+        <rect x="52" y="74" width="296" height="60" rx="13" fill="#1a0000"/>
+        <path d="M102 74 Q115 42 134 35 L276 35 Q298 35 308 50 L326 74 Z" fill="#220000"/>
+        <path d="M116 70 Q122 44 136 38 L184 38 L184 70 Z" fill="#6a1515" opacity="0.9"/>
+        <path d="M192 38 L268 38 Q286 38 296 52 L308 70 L192 70 Z" fill="#6a1515" opacity="0.9"/>
+        <rect x="184" y="37" width="6" height="33" rx="3" fill="#1a0000"/>
+        <path d="M136 48 Q186 40 236 48" stroke="rgba(232,21,27,0.6)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M122 60 Q165 54 208 60" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="104" cy="131" r="28" fill="#0a0a0a"/><circle cx="104" cy="131" r="18" fill="#1a0000"/><circle cx="104" cy="131" r="9" fill="#E8151B" opacity="0.8"/>
+        <circle cx="300" cy="131" r="28" fill="#0a0a0a"/><circle cx="300" cy="131" r="18" fill="#1a0000"/><circle cx="300" cy="131" r="9" fill="#E8151B" opacity="0.8"/>
+        <text x="18" y="36" font-size="18" fill="#E8151B">✦</text>
+        <text x="356" y="38" font-size="14" fill="#E8151B">✦</text>
+        <text x="186" y="22" font-size="12" fill="#E8151B" opacity="0.8">✦</text>
+        <text x="335" y="66" font-size="9" fill="#E8151B" opacity="0.6">✦</text>
       </svg>
       <div class="service-header">
-        <div class="service-name">✨ Signature Wash</div>
-        <div class="service-desc">A deep clean inside and out, leaving your car looking like new.</div>
+        <div class="service-name">Signature Wash</div>
+        <div class="service-desc">Deep clean inside and out, leaving your car looking like new.</div>
       </div>
       <ul class="service-features">
-        <li>Full exterior hand wash</li>
-        <li>Wheel, rim & tire detail</li>
-        <li>Interior vacuum & wipe-down</li>
-        <li>Dashboard & console clean</li>
-        <li>Window interior & exterior</li>
-        <li>Tire shine treatment</li>
-        <li>Air freshener</li>
+        <li>Full exterior hand wash</li><li>Wheel, rim & tire detail</li>
+        <li>Interior vacuum & wipe-down</li><li>Dashboard & console clean</li>
+        <li>Window interior & exterior</li><li>Tire shine treatment</li><li>Air freshener</li>
       </ul>
       <div class="service-footer">
-        <div class="service-price">
-          <span class="price-from">Starting from</span>
-          <span class="price-amount">$89</span>
-          <span class="price-unit">+ tax</span>
-        </div>
+        <div><span class="price-from">Starting from</span><span class="price-amount">$89</span><span class="price-unit"> + tax</span></div>
         <button class="book-btn" onclick="openBooking('Signature Wash')">Book Now</button>
       </div>
     </div>
 
-    <!-- Full Detail -->
     <div class="service-card">
-      <svg class="service-thumb" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="160" fill="#050e1c"/>
-        <rect width="400" height="160" fill="url(#sg3)"/>
-        <!-- Premium car dark -->
-        <rect x="50" y="82" width="300" height="58" rx="14" fill="#1a237e"/>
-        <path d="M100 82 Q115 50 136 42 L275 42 Q298 42 308 58 L326 82 Z" fill="#283593"/>
-        <path d="M113 78 Q120 53 138 46 L186 46 L186 78 Z" fill="#90caf9" opacity="0.85"/>
-        <path d="M194 46 L267 46 Q285 46 295 60 L310 78 L194 78 Z" fill="#90caf9" opacity="0.85"/>
-        <circle cx="104" cy="137" r="30" fill="#111"/><circle cx="104" cy="137" r="20" fill="#1a2540"/><circle cx="104" cy="137" r="10" fill="#111"/>
-        <circle cx="306" cy="137" r="30" fill="#111"/><circle cx="306" cy="137" r="20" fill="#1a2540"/><circle cx="306" cy="137" r="10" fill="#111"/>
-        <!-- Polisher tool -->
-        <circle cx="368" cy="75" r="22" fill="#e53935" opacity="0.9"/>
-        <circle cx="368" cy="75" r="16" fill="#ffcdd2"/>
-        <circle cx="368" cy="75" r="8" fill="#ef9a9a"/>
-        <rect x="365" y="48" width="6" height="20" rx="3" fill="#888"/>
-        <rect x="356" y="44" width="24" height="10" rx="4" fill="#666"/>
-        <!-- Polish glow on car -->
-        <ellipse cx="280" cy="62" rx="30" ry="12" fill="rgba(255,255,255,0.08)"/>
-        <!-- Diamond/gem icon -->
-        <polygon points="200,10 215,20 210,35 190,35 185,20" fill="rgba(144,202,249,0.3)" stroke="#90caf9" stroke-width="1.5"/>
-        <!-- shine lines -->
-        <path d="M136 54 Q185 46 234 54" stroke="rgba(255,255,255,0.5)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-        <text x="20" y="35" font-size="18" fill="#90caf9">✦</text>
-        <text x="340" y="35" font-size="14" fill="#90caf9">✦</text>
-        <defs><linearGradient id="sg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(26,35,126,0.5)"/><stop offset="100%" stop-color="rgba(0,0,0,0.3)"/></linearGradient></defs>
+      <svg class="service-thumb" viewBox="0 0 400 155" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="155" fill="#050508"/>
+        <rect x="48" y="76" width="304" height="62" rx="13" fill="#0d0020"/>
+        <path d="M98 76 Q112 42 132 34 L278 34 Q300 34 311 51 L330 76 Z" fill="#140028"/>
+        <path d="M112 72 Q118 45 134 38 L182 38 L182 72 Z" fill="#2a0050" opacity="0.85"/>
+        <path d="M190 38 L270 38 Q290 38 300 54 L312 72 L190 72 Z" fill="#2a0050" opacity="0.85"/>
+        <path d="M134 50 Q185 42 235 50" stroke="rgba(200,100,255,0.35)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <circle cx="100" cy="133" r="28" fill="#080808"/><circle cx="100" cy="133" r="18" fill="#160030"/><circle cx="100" cy="133" r="9" fill="#E8151B" opacity="0.9"/>
+        <circle cx="302" cy="133" r="28" fill="#080808"/><circle cx="302" cy="133" r="18" fill="#160030"/><circle cx="302" cy="133" r="9" fill="#E8151B" opacity="0.9"/>
+        <!-- polisher -->
+        <circle cx="365" cy="68" r="20" fill="#E8151B" opacity="0.9"/>
+        <circle cx="365" cy="68" r="14" fill="#ff6666"/>
+        <circle cx="365" cy="68" r="7" fill="#ff9999"/>
+        <rect x="362" y="42" width="6" height="19" rx="3" fill="#666"/>
+        <rect x="354" y="38" width="22" height="9" rx="4" fill="#555"/>
+        <polygon points="190,8 204,18 199,32 181,32 176,18" fill="rgba(200,100,255,0.2)" stroke="rgba(200,100,255,0.4)" stroke-width="1.5"/>
+        <text x="18" y="30" font-size="16" fill="#E8151B">✦</text>
+        <text x="330" y="28" font-size="12" fill="#E8151B" opacity="0.8">✦</text>
       </svg>
       <div class="service-header">
-        <div class="service-name">💎 Full Detail</div>
-        <div class="service-desc">An intensive detail that restores your car to showroom condition.</div>
+        <div class="service-name">Full Detail</div>
+        <div class="service-desc">Intensive detail that restores your car to showroom condition.</div>
       </div>
       <ul class="service-features">
-        <li>Everything in Signature Wash</li>
-        <li>Clay bar treatment</li>
-        <li>Paint decontamination</li>
-        <li>Leather/seat conditioning</li>
-        <li>Engine bay cleaning</li>
-        <li>Wax or sealant coating</li>
+        <li>Everything in Signature Wash</li><li>Clay bar treatment</li>
+        <li>Paint decontamination</li><li>Leather/seat conditioning</li>
+        <li>Engine bay cleaning</li><li>Wax or sealant coating</li>
       </ul>
       <div class="service-footer">
-        <div class="service-price">
-          <span class="price-from">Starting from</span>
-          <span class="price-amount">$160</span>
-          <span class="price-unit">+ tax</span>
-        </div>
+        <div><span class="price-from">Starting from</span><span class="price-amount">$160</span><span class="price-unit"> + tax</span></div>
         <button class="book-btn" onclick="openBooking('Full Detail')">Book Now</button>
       </div>
     </div>
 
-    <!-- SUV Add-on -->
     <div class="service-card">
-      <svg class="service-thumb" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="160" fill="#071428"/>
-        <rect width="400" height="160" fill="url(#sg4)"/>
-        <!-- SUV / tall vehicle -->
-        <rect x="40" y="68" width="320" height="72" rx="14" fill="#1b5e20"/>
-        <path d="M88 68 Q100 28 128 20 L290 20 Q320 20 332 42 L356 68 Z" fill="#2e7d32"/>
-        <path d="M102 64 Q110 32 128 24 L190 24 L190 64 Z" fill="#a5d6a7" opacity="0.8"/>
-        <path d="M198 24 L283 24 Q308 24 320 40 L340 64 L198 64 Z" fill="#a5d6a7" opacity="0.8"/>
+      <svg class="service-thumb" viewBox="0 0 400 155" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="155" fill="#080808"/>
+        <rect x="38" y="64" width="324" height="76" rx="13" fill="#001a00"/>
+        <path d="M85 64 Q97 22 122 14 L290 14 Q320 14 332 36 L358 64 Z" fill="#002200"/>
+        <path d="M100 60 Q108 26 124 18 L188 18 L188 60 Z" fill="#224422" opacity="0.8"/>
+        <path d="M196 18 L283 18 Q308 18 320 34 L342 60 L196 60 Z" fill="#224422" opacity="0.8"/>
         <!-- roof rack -->
-        <rect x="128" y="14" width="162" height="8" rx="3" fill="#1b5e20"/>
-        <rect x="140" y="8" width="6" height="12" rx="2" fill="#388e3c"/>
-        <rect x="175" y="8" width="6" height="12" rx="2" fill="#388e3c"/>
-        <rect x="210" y="8" width="6" height="12" rx="2" fill="#388e3c"/>
-        <rect x="245" y="8" width="6" height="12" rx="2" fill="#388e3c"/>
-        <rect x="278" y="8" width="6" height="12" rx="2" fill="#388e3c"/>
-        <!-- bigger wheels for SUV -->
-        <circle cx="108" cy="138" r="34" fill="#1a1a2e"/><circle cx="108" cy="138" r="23" fill="#263a5a"/><circle cx="108" cy="138" r="12" fill="#1a1a2e"/>
-        <circle cx="304" cy="138" r="34" fill="#1a1a2e"/><circle cx="304" cy="138" r="23" fill="#263a5a"/><circle cx="304" cy="138" r="12" fill="#1a1a2e"/>
-        <!-- shine on car -->
-        <path d="M130 32 Q190 24 248 32" stroke="rgba(255,255,255,0.45)" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <text x="20" y="50" font-size="14" fill="#FFD93D">✦</text>
-        <text x="365" y="45" font-size="11" fill="#FFD93D">✦</text>
-        <defs><linearGradient id="sg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(27,94,32,0.3)"/><stop offset="100%" stop-color="rgba(0,0,0,0.2)"/></linearGradient></defs>
+        <rect x="125" y="8" width="164" height="8" rx="2.5" fill="#001a00"/>
+        <rect x="138" y="3" width="5" height="11" rx="2" fill="#003300"/>
+        <rect x="172" y="3" width="5" height="11" rx="2" fill="#003300"/>
+        <rect x="206" y="3" width="5" height="11" rx="2" fill="#003300"/>
+        <rect x="240" y="3" width="5" height="11" rx="2" fill="#003300"/>
+        <rect x="274" y="3" width="5" height="11" rx="2" fill="#003300"/>
+        <circle cx="102" cy="136" r="32" fill="#0a0a0a"/><circle cx="102" cy="136" r="21" fill="#1a1a1a"/><circle cx="102" cy="136" r="11" fill="#0a0a0a"/><circle cx="102" cy="136" r="5" fill="#E8151B" opacity="0.8"/>
+        <circle cx="304" cy="136" r="32" fill="#0a0a0a"/><circle cx="304" cy="136" r="21" fill="#1a1a1a"/><circle cx="304" cy="136" r="11" fill="#0a0a0a"/><circle cx="304" cy="136" r="5" fill="#E8151B" opacity="0.8"/>
+        <path d="M124 26 Q190 18 256 26" stroke="rgba(232,21,27,0.35)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <text x="18" y="44" font-size="13" fill="#E8151B">✦</text>
+        <text x="368" y="40" font-size="10" fill="#E8151B" opacity="0.7">✦</text>
       </svg>
       <div class="service-header">
-        <div class="service-name">🛻 SUV / Truck Add-on</div>
-        <div class="service-desc">Add this to any package for trucks and large SUVs — they need extra love!</div>
+        <div class="service-name">SUV / Truck Add-on</div>
+        <div class="service-desc">Add to any package for trucks and large SUVs. They need extra love!</div>
       </div>
       <ul class="service-features">
-        <li>Extra time for larger size</li>
-        <li>Additional product usage</li>
-        <li>Third-row seat cleaning</li>
-        <li>Cargo area included</li>
+        <li>Extra time for larger size</li><li>Additional product usage</li>
+        <li>Third-row seat cleaning</li><li>Cargo area included</li>
       </ul>
       <div class="service-footer">
-        <div class="service-price">
-          <span class="price-from">Add-on from</span>
-          <span class="price-amount">$20</span>
-          <span class="price-unit">+ tax</span>
-        </div>
+        <div><span class="price-from">Add-on from</span><span class="price-amount">$20</span><span class="price-unit"> + tax</span></div>
         <button class="book-btn" onclick="openBooking('SUV/Truck Add-on')">Book Now</button>
       </div>
     </div>
@@ -798,32 +697,23 @@
   <div class="booking-wrap">
     <div class="booking-info">
       <h3>📍 We Come to You</h3>
-      <p>Just give us your address anywhere in the GTA and we'll bring all the equipment — water, power, everything we need.</p>
+      <p>Give us your address anywhere in the GTA and we'll bring all the equipment — water, power, everything.</p>
       <h3>🕐 Flexible Hours</h3>
-      <p>We're available 7 days a week, from 8 AM to 7 PM. Weekend slots fill up fast, so book early!</p>
+      <p>Available 7 days a week, 8 AM to 7 PM. Weekend slots fill up fast, book early!</p>
       <h3>❄️ Weather Policy</h3>
-      <p>If we need to reschedule due to bad weather, your deposit stays safe and rolls over to the new date.</p>
+      <p>If we reschedule due to bad weather, your deposit rolls over to the new date automatically.</p>
       <div class="deposit-box">
-        <h4>💳 Deposit to Book</h4>
+        <h4>Deposit to Book</h4>
         <div class="deposit-amount">$20</div>
-        <p>A small $20 deposit secures your time slot. The remaining balance is paid after the wash. No surprises.</p>
+        <p>A small $20 deposit secures your time slot. Remaining balance paid after the wash. No surprises.</p>
       </div>
     </div>
     <div class="booking-form" id="bookingFormWrap">
-      <div class="form-title">🗓️ Book Your Appointment</div>
-      <div class="form-group">
-        <label>Your Name</label>
-        <input type="text" id="f-name" placeholder="Alex Johnson"/>
-      </div>
+      <div class="form-title">Book Your Appointment</div>
+      <div class="form-group"><label>Your Name</label><input type="text" id="f-name" placeholder="Alex Johnson"/></div>
       <div class="form-row">
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="tel" id="f-phone" placeholder="(416) 555-0123"/>
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="f-email" placeholder="alex@email.com"/>
-        </div>
+        <div class="form-group"><label>Phone</label><input type="tel" id="f-phone" placeholder="(416) 555-0123"/></div>
+        <div class="form-group"><label>Email</label><input type="email" id="f-email" placeholder="alex@email.com"/></div>
       </div>
       <div class="form-group">
         <label>Service Package</label>
@@ -836,10 +726,7 @@
         </select>
       </div>
       <div class="form-row">
-        <div class="form-group">
-          <label>Preferred Date</label>
-          <input type="date" id="f-date"/>
-        </div>
+        <div class="form-group"><label>Preferred Date</label><input type="date" id="f-date"/></div>
         <div class="form-group">
           <label>Preferred Time</label>
           <select id="f-time">
@@ -851,21 +738,15 @@
           </select>
         </div>
       </div>
-      <div class="form-group">
-        <label>Your Address in GTA</label>
-        <input type="text" id="f-address" placeholder="123 Main St, Toronto, ON"/>
-      </div>
-      <div class="form-group">
-        <label>Notes (optional)</label>
-        <textarea id="f-notes" placeholder="Car model, special requests, gate codes..."></textarea>
-      </div>
+      <div class="form-group"><label>Your Address in GTA</label><input type="text" id="f-address" placeholder="123 Main St, Toronto, ON"/></div>
+      <div class="form-group"><label>Notes (optional)</label><textarea id="f-notes" placeholder="Car model, special requests, gate codes..."></textarea></div>
       <button class="submit-btn" onclick="submitBooking()">Confirm & Pay $20 Deposit →</button>
       <p class="form-note">🔒 Secure payment · Deposit refundable with 24h notice</p>
     </div>
     <div class="booking-success" id="bookingSuccess">
       <div class="success-icon">🎉</div>
       <h3>Booking Confirmed!</h3>
-      <p>Thanks! We'll reach out shortly to confirm your appointment. See you on the day!</p>
+      <p>Thanks! We'll reach out shortly to confirm. See you on the day!</p>
     </div>
   </div>
 </section>
@@ -898,26 +779,17 @@
     <div class="review-card">
       <div class="review-stars">★★★★★</div>
       <div class="review-text">"Booked the Signature Wash and honestly my car looks better than when I bought it. Super easy to book and they showed up right on time."</div>
-      <div class="review-author">
-        <div class="review-avatar" style="background:#1AAFFF">JK</div>
-        <div><div class="review-name">Jamie K.</div><div class="review-loc">North York, Toronto</div></div>
-      </div>
+      <div class="review-author"><div class="review-avatar">JK</div><div><div class="review-name">Jamie K.</div><div class="review-loc">North York, Toronto</div></div></div>
     </div>
     <div class="review-card">
       <div class="review-stars">★★★★★</div>
       <div class="review-text">"I have two kids and my car was a disaster inside. Got the Full Detail and I literally couldn't believe the transformation. Worth every penny."</div>
-      <div class="review-author">
-        <div class="review-avatar" style="background:#3DDC84">SR</div>
-        <div><div class="review-name">Sara R.</div><div class="review-loc">Mississauga</div></div>
-      </div>
+      <div class="review-author"><div class="review-avatar">SR</div><div><div class="review-name">Sara R.</div><div class="review-loc">Mississauga</div></div></div>
     </div>
     <div class="review-card">
       <div class="review-stars">★★★★★</div>
       <div class="review-text">"The convenience is unbeatable. They came to my condo parking garage and I didn't have to do a thing. Will definitely book again."</div>
-      <div class="review-author">
-        <div class="review-avatar" style="background:#FFD93D; color:#1a2a3a">MP</div>
-        <div><div class="review-name">Marco P.</div><div class="review-loc">Vaughan</div></div>
-      </div>
+      <div class="review-author"><div class="review-avatar">MP</div><div><div class="review-name">Marco P.</div><div class="review-loc">Vaughan</div></div></div>
     </div>
   </div>
 </section>
@@ -927,36 +799,18 @@
   <div class="section-label">Got Questions?</div>
   <div class="section-title">Frequently Asked</div>
   <div class="faq-list">
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Do you bring your own water and power? <span class="faq-arrow">▾</span></div>
-      <div class="faq-a"><p>Yes! We bring everything — our own water supply, power generator, and all cleaning products. You don't need to provide anything.</p></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">How long does each service take? <span class="faq-arrow">▾</span></div>
-      <div class="faq-a"><p>Basic Wash takes about 45–60 minutes. Signature Wash is 1.5–2 hours. Full Detail can take 3–5 hours depending on the vehicle's condition.</p></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Is the $20 deposit refundable? <span class="faq-arrow">▾</span></div>
-      <div class="faq-a"><p>Yes! If you cancel or reschedule at least 24 hours before your appointment, your deposit is fully refunded. No questions asked.</p></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">What if it rains on my booking day? <span class="faq-arrow">▾</span></div>
-      <div class="faq-a"><p>We'll reach out to reschedule if the weather is bad. Your deposit automatically moves to the new date — no hassle.</p></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Do you service all vehicle types? <span class="faq-arrow">▾</span></div>
-      <div class="faq-a"><p>We handle sedans, coupes, SUVs, trucks, vans, and minivans. Just add the SUV/Truck add-on when booking a larger vehicle.</p></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">How do I pay the remaining balance? <span class="faq-arrow">▾</span></div>
-      <div class="faq-a"><p>After the job is done, you can pay the remaining balance by e-Transfer, credit card, or cash — whatever works best for you.</p></div>
-    </div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you bring your own water and power? <span class="faq-arrow">▾</span></div><div class="faq-a"><p>Yes! We bring everything — our own water supply, power generator, and all cleaning products. You don't need to provide anything.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does each service take? <span class="faq-arrow">▾</span></div><div class="faq-a"><p>Basic Wash takes about 45–60 minutes. Signature Wash is 1.5–2 hours. Full Detail can take 3–5 hours depending on the vehicle's condition.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is the $20 deposit refundable? <span class="faq-arrow">▾</span></div><div class="faq-a"><p>Yes! If you cancel or reschedule at least 24 hours before your appointment, your deposit is fully refunded. No questions asked.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What if it rains on my booking day? <span class="faq-arrow">▾</span></div><div class="faq-a"><p>We'll reach out to reschedule if the weather is bad. Your deposit automatically moves to the new date.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you service all vehicle types? <span class="faq-arrow">▾</span></div><div class="faq-a"><p>We handle sedans, coupes, SUVs, trucks, vans, and minivans. Just add the SUV/Truck add-on when booking a larger vehicle.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do I pay the remaining balance? <span class="faq-arrow">▾</span></div><div class="faq-a"><p>After the job is done, you can pay the remaining balance by e-Transfer, credit card, or cash — whatever works best for you.</p></div></div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">SplashGo</div>
+  <div class="footer-logo">Splash<span>Go</span></div>
   <div class="footer-tagline">Mobile Car Wash · Serving All of GTA · 7 Days a Week</div>
   <div class="footer-links">
     <a href="#how">How it Works</a><a href="#services">Services</a>
@@ -969,13 +823,13 @@
 <div class="modal-overlay" id="payModal">
   <div class="modal">
     <div class="modal-header">
-      <div class="modal-title">Pay Deposit 💳</div>
+      <div class="modal-title">Pay Deposit</div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-summary">
       <div class="row"><span>Service</span><span id="modal-service">—</span></div>
       <div class="row"><span>Date & Time</span><span id="modal-datetime">—</span></div>
-      <div class="row"><span>Deposit to secure booking</span><span>$20.00</span></div>
+      <div class="row"><span>Deposit</span><span>$20.00</span></div>
     </div>
     <div class="payment-methods">
       <div class="pay-method active" onclick="setMethod(this,'card')"><span class="pm-icon">💳</span>Card</div>
@@ -991,37 +845,26 @@
       </div>
     </div>
     <div id="etransferInfo" style="display:none" class="info-box">
-      📧 Send $20 e-Transfer to <strong style="color:#0A1628">pay@splashgo.ca</strong><br>
-      Use your <strong style="color:#0A1628">phone number</strong> as the reference. We'll confirm once received.
+      📧 Send $20 e-Transfer to <strong>pay@splashgo.ca</strong><br>
+      Use your <strong>phone number</strong> as the reference. We'll confirm once received.
     </div>
     <div id="paypalInfo" style="display:none" class="info-box">
-      🅿️ Send $20 via PayPal to <strong style="color:#0A1628">pay@splashgo.ca</strong><br>
+      🅿️ Send $20 via PayPal to <strong>pay@splashgo.ca</strong><br>
       Add your name and service in the notes so we can match your booking.
     </div>
     <button class="pay-now-btn" id="payBtn" onclick="completePayment()">Pay $20 Deposit Now</button>
-    <div class="secure-note">🔒 Secure & encrypted · Refundable with 24h notice</div>
+    <div class="secure-note">🔒 Secure & Encrypted · Refundable with 24h Notice</div>
   </div>
 </div>
 
 <script>
-  // Bubbles
-  const bc = document.getElementById('bubbles');
-  for(let i=0;i<16;i++){
-    const b=document.createElement('div'); b.className='bubble';
-    const s=20+Math.random()*55;
-    b.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${9+Math.random()*12}s;animation-delay:${Math.random()*10}s;`;
-    bc.appendChild(b);
-  }
-  // Min date
   const di=document.getElementById('f-date');
   if(di){const t=new Date();t.setDate(t.getDate()+1);di.min=t.toISOString().split('T')[0];}
-  // Open booking from service cards
   function openBooking(service){
     const sel=document.getElementById('f-service');
     for(let o of sel.options){if(o.value.includes(service)){sel.value=o.value;break;}}
     document.getElementById('booking').scrollIntoView({behavior:'smooth'});
   }
-  // Submit
   function submitBooking(){
     const name=document.getElementById('f-name').value.trim();
     const service=document.getElementById('f-service').value;
@@ -1035,14 +878,13 @@
     document.getElementById('payModal').classList.add('active');
   }
   function closeModal(){document.getElementById('payModal').classList.remove('active');}
-  let currentMethod='card';
   function setMethod(el,method){
     document.querySelectorAll('.pay-method').forEach(m=>m.classList.remove('active'));
-    el.classList.add('active'); currentMethod=method;
+    el.classList.add('active');
     document.getElementById('cardFields').style.display=method==='card'?'grid':'none';
     document.getElementById('etransferInfo').style.display=method==='etransfer'?'block':'none';
     document.getElementById('paypalInfo').style.display=method==='paypal'?'block':'none';
-    document.getElementById('payBtn').textContent=method==='card'?'Pay $20 Deposit Now':'I\'ve Sent My $20 Deposit ✓';
+    document.getElementById('payBtn').textContent=method==='card'?'Pay $20 Deposit Now':"I've Sent My $20 Deposit ✓";
   }
   function formatCard(inp){let v=inp.value.replace(/\D/g,'').substring(0,16);inp.value=v.replace(/(.{4})/g,'$1 ').trim();}
   function completePayment(){
