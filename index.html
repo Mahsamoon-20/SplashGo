@@ -7,15 +7,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --red: #E8151B;
-    --red2: #ff3a3f;
-    --dark: #080808;
-    --dark2: #111111;
-    --dark3: #1a1a1a;
-    --dark4: #222222;
-    --border: rgba(232,21,27,0.25);
-    --text: #f0f0f0;
-    --muted: #888888;
+    --red: #C0392B;
+    --red2: #E74C3C;
+    --dark: #0E0E0E;
+    --dark2: #141414;
+    --dark3: #1C1C1C;
+    --dark4: #242424;
+    --border: rgba(192,57,43,0.2);
+    --text: #E8E8E8;
+    --muted: #7A7A7A;
     --radius: 14px;
     --shadow: 0 8px 40px rgba(0,0,0,0.6);
   }
@@ -66,7 +66,6 @@
     background-size: 60px 60px;
   }
   .hero-content { position: relative; z-index: 2; animation: fadeUp .7s ease both; }
-  .hero-visual { position: relative; z-index: 2; animation: fadeUp .7s .15s ease both; display: flex; align-items: center; justify-content: center; }
   @keyframes fadeUp { from { opacity:0; transform: translateY(28px); } to { opacity:1; transform: translateY(0); } }
   .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(232,21,27,0.12); color: var(--red); border: 1px solid var(--border); border-radius: 4px; padding: 6px 16px; font-size: 0.78rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 22px; text-transform: uppercase; }
   .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3.5rem, 8vw, 6.5rem); font-weight: 900; line-height: 0.95; color: #fff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px; }
@@ -80,7 +79,6 @@
   .hero-stats { margin-top: 52px; display: flex; gap: 40px; flex-wrap: wrap; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.07); }
   .stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--red); line-height: 1; }
   .stat-label { color: var(--muted); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
-  .hero-car-scene { width: 100%; max-width: 540px; filter: drop-shadow(0 20px 60px rgba(232,21,27,0.25)); }
 
   /* SECTIONS */
   section { padding: 90px 6vw; }
@@ -98,23 +96,7 @@
   .step-num { font-family: 'Barlow Condensed', sans-serif; font-size: 4rem; font-weight: 900; line-height: 1; color: rgba(232,21,27,0.12); position: absolute; top: 16px; right: 22px; }
   .step-icon { font-size: 2rem; margin-bottom: 18px; }
   .step-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 10px; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
-  .step-card p { color: var(--muted); font-size: 0.93rem; line-height: 1.65; }
-
-  /* GALLERY */
-  #gallery { background: var(--dark); padding: 90px 6vw; }
-  .gallery-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 230px 230px; gap: 3px; margin-top: 48px; }
-  .gallery-item { overflow: hidden; position: relative; transition: opacity .25s; cursor: pointer; }
-  .gallery-item:hover { opacity: 0.85; }
-  .gallery-item:first-child { grid-row: span 2; }
-  .gallery-item svg { width: 100%; height: 100%; display: block; }
-  .gallery-item::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(232,21,27,0.15); pointer-events: none; }
-  @media(max-width: 700px) {
-    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .gallery-item:first-child { grid-column: span 2; grid-row: span 1; }
-    .gallery-item { height: 150px; }
-  }
-
-  /* SERVICES */
+  .step-card p { color: var(--muted); font-size: 0.93rem; line-height: 1.65; }/* SERVICES */
   #services { background: var(--dark2); }
   .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; margin-top: 52px; }
   .service-card { background: var(--dark3); overflow: hidden; transition: background .2s; position: relative; border: 1px solid rgba(255,255,255,0.04); }
@@ -123,7 +105,6 @@
   .service-card:hover::after { transform: scaleX(1); }
   .service-card.popular { border-top: 3px solid var(--red); }
   .popular-badge { position: absolute; top: 12px; right: 12px; background: var(--red); color: #fff; font-size: 0.68rem; font-weight: 800; padding: 4px 10px; letter-spacing: 1px; text-transform: uppercase; z-index: 3; }
-  .service-thumb { width: 100%; height: 155px; display: block; }
   .service-header { padding: 20px 22px 0; }
   .service-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
   .service-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 14px; }
@@ -236,7 +217,7 @@
   .info-box strong { color: #fff; }
 
   /* RESPONSIVE */
-  @media(max-width: 860px) { .hero { grid-template-columns: 1fr; } .hero-visual { display: none; } }
+  @media(max-width: 860px) { .hero { grid-template-columns: 1fr; } }
   @media(max-width: 768px) { .booking-wrap { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
   @media(max-width: 680px) { .nav-links, .nav-cta { display: none; } .hamburger { display: block; } nav { padding: 0 5vw; } .hero { padding: 90px 5vw 50px; } }
 </style>
@@ -272,102 +253,6 @@
       <div class="stat-item"><div class="stat-num">GTA</div><div class="stat-label">Wide Coverage</div></div>
     </div>
   </div>
-  <div class="hero-visual">
-    <svg class="hero-car-scene" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(255,255,255,0.10)"/>
-          <stop offset="100%" stop-color="rgba(0,0,0,0.25)"/>
-        </linearGradient>
-        <linearGradient id="redGlow" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#E8151B"/>
-          <stop offset="100%" stop-color="#a00"/>
-        </linearGradient>
-        <radialGradient id="groundGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="rgba(232,21,27,0.2)"/>
-          <stop offset="100%" stop-color="transparent"/>
-        </radialGradient>
-      </defs>
-      <!-- Ground glow -->
-      <ellipse cx="260" cy="308" rx="220" ry="18" fill="url(#groundGlow)"/>
-      <rect x="40" y="296" width="440" height="10" rx="5" fill="#111"/>
-      <!-- Road markings -->
-      <rect x="130" y="299" width="36" height="3" rx="1.5" fill="rgba(255,255,255,0.08)"/>
-      <rect x="230" y="299" width="36" height="3" rx="1.5" fill="rgba(255,255,255,0.08)"/>
-      <rect x="330" y="299" width="36" height="3" rx="1.5" fill="rgba(255,255,255,0.08)"/>
-      <!-- Car body -->
-      <rect x="58" y="222" width="404" height="76" rx="16" fill="#1a0000"/>
-      <rect x="58" y="222" width="404" height="76" rx="16" fill="url(#bodyGrad)"/>
-      <!-- Red accent stripe -->
-      <rect x="58" y="270" width="404" height="6" rx="0" fill="url(#redGlow)" opacity="0.7"/>
-      <!-- Cabin -->
-      <path d="M148 222 Q166 158 206 148 L336 148 Q374 148 388 166 L412 222 Z" fill="#200000"/>
-      <path d="M148 222 Q166 158 206 148 L336 148 Q374 148 388 166 L412 222 Z" fill="url(#bodyGrad)"/>
-      <!-- Windows -->
-      <path d="M172 216 Q182 170 212 160 L278 160 L278 216 Z" fill="#3a0000" opacity="0.9"/>
-      <path d="M286 160 L336 160 Q362 160 374 174 L392 216 L286 216 Z" fill="#3a0000" opacity="0.9"/>
-      <!-- Window tint shimmer -->
-      <path d="M190 168 Q215 163 232 170" stroke="rgba(232,21,27,0.3)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <path d="M300 164 Q322 161 342 168" stroke="rgba(232,21,27,0.25)" stroke-width="2" stroke-linecap="round" fill="none"/>
-      <!-- Window divider -->
-      <rect x="281" y="159" width="4" height="57" rx="2" fill="#1a0000"/>
-      <!-- Front grill -->
-      <rect x="60" y="248" width="46" height="24" rx="6" fill="#0d0000"/>
-      <rect x="64" y="252" width="38" height="4" rx="2" fill="rgba(232,21,27,0.3)"/>
-      <rect x="64" y="260" width="38" height="4" rx="2" fill="rgba(232,21,27,0.3)"/>
-      <!-- Headlights -->
-      <rect x="62" y="228" width="44" height="16" rx="6" fill="#E8151B" opacity="0.9"/>
-      <rect x="62" y="228" width="44" height="16" rx="6" fill="url(#redGlow)" opacity="0.5"/>
-      <!-- Headlight glow -->
-      <ellipse cx="84" cy="236" rx="30" ry="10" fill="rgba(232,21,27,0.15)"/>
-      <!-- Taillights -->
-      <rect x="414" y="228" width="36" height="16" rx="6" fill="#E8151B" opacity="0.8"/>
-      <!-- Taillight glow -->
-      <ellipse cx="432" cy="236" rx="22" ry="8" fill="rgba(232,21,27,0.2)"/>
-      <!-- Door lines -->
-      <line x1="268" y1="224" x2="268" y2="296" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
-      <!-- Wheels -->
-      <circle cx="152" cy="293" r="40" fill="#0a0a0a"/>
-      <circle cx="152" cy="293" r="30" fill="#161616"/>
-      <circle cx="152" cy="293" r="19" fill="#0a0a0a"/>
-      <circle cx="152" cy="293" r="10" fill="#E8151B" opacity="0.8"/>
-      <line x1="152" y1="274" x2="152" y2="263" stroke="#333" stroke-width="3.5"/>
-      <line x1="152" y1="312" x2="152" y2="323" stroke="#333" stroke-width="3.5"/>
-      <line x1="133" y1="293" x2="122" y2="293" stroke="#333" stroke-width="3.5"/>
-      <line x1="171" y1="293" x2="182" y2="293" stroke="#333" stroke-width="3.5"/>
-      <line x1="139" y1="280" x2="131" y2="272" stroke="#333" stroke-width="2.5"/>
-      <line x1="165" y1="306" x2="173" y2="314" stroke="#333" stroke-width="2.5"/>
-      <line x1="139" y1="306" x2="131" y2="314" stroke="#333" stroke-width="2.5"/>
-      <line x1="165" y1="280" x2="173" y2="272" stroke="#333" stroke-width="2.5"/>
-      <!-- Wheel 2 -->
-      <circle cx="372" cy="293" r="40" fill="#0a0a0a"/>
-      <circle cx="372" cy="293" r="30" fill="#161616"/>
-      <circle cx="372" cy="293" r="19" fill="#0a0a0a"/>
-      <circle cx="372" cy="293" r="10" fill="#E8151B" opacity="0.8"/>
-      <line x1="372" y1="274" x2="372" y2="263" stroke="#333" stroke-width="3.5"/>
-      <line x1="372" y1="312" x2="372" y2="323" stroke="#333" stroke-width="3.5"/>
-      <line x1="353" y1="293" x2="342" y2="293" stroke="#333" stroke-width="3.5"/>
-      <line x1="391" y1="293" x2="402" y2="293" stroke="#333" stroke-width="3.5"/>
-      <line x1="359" y1="280" x2="351" y2="272" stroke="#333" stroke-width="2.5"/>
-      <line x1="385" y1="306" x2="393" y2="314" stroke="#333" stroke-width="2.5"/>
-      <line x1="359" y1="306" x2="351" y2="314" stroke="#333" stroke-width="2.5"/>
-      <line x1="385" y1="280" x2="393" y2="272" stroke="#333" stroke-width="2.5"/>
-      <!-- Water splashes (red-tinted) -->
-      <ellipse cx="96" cy="183" rx="16" ry="7" fill="rgba(232,21,27,0.4)" transform="rotate(-20,96,183)"/>
-      <ellipse cx="432" cy="198" rx="12" ry="5" fill="rgba(232,21,27,0.35)" transform="rotate(15,432,198)"/>
-      <circle cx="82" cy="168" r="5" fill="rgba(232,21,27,0.5)"/>
-      <circle cx="446" cy="186" r="4" fill="rgba(232,21,27,0.45)"/>
-      <!-- Soap bubbles -->
-      <circle cx="66" cy="138" r="10" fill="none" stroke="rgba(232,21,27,0.4)" stroke-width="1.5"/>
-      <circle cx="490" cy="152" r="8" fill="none" stroke="rgba(232,21,27,0.3)" stroke-width="1.5"/>
-      <circle cx="48" cy="98" r="13" fill="none" stroke="rgba(232,21,27,0.25)" stroke-width="1.5"/>
-      <circle cx="488" cy="108" r="10" fill="none" stroke="rgba(232,21,27,0.2)" stroke-width="1.5"/>
-      <!-- Sparkle stars -->
-      <text x="198" y="134" font-size="14" fill="#E8151B" opacity="0.9">✦</text>
-      <text x="348" y="126" font-size="10" fill="#E8151B" opacity="0.7">✦</text>
-      <text x="428" y="138" font-size="8" fill="#fff" opacity="0.4">✦</text>
-    </svg>
-  </div>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -383,166 +268,6 @@
   </div>
 </section>
 
-<!-- GALLERY -->
-<section id="gallery">
-  <div class="section-label">Our Work</div>
-  <div class="section-title">Results That Speak</div>
-  <div class="section-sub">From dusty to dazzling.</div>
-  <div class="gallery-grid">
-    <div class="gallery-item">
-      <svg viewBox="0 0 400 460" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-        <rect width="400" height="460" fill="#080808"/>
-        <rect width="400" height="460" fill="url(#gg1)"/>
-        <rect x="18" y="240" width="364" height="80" rx="14" fill="#1a0000"/>
-        <path d="M68 240 Q82 192 108 184 L302 184 Q328 184 338 200 L358 240 Z" fill="#200000"/>
-        <path d="M84 236 Q90 196 108 188 L190 188 L190 236 Z" fill="#5a1010" opacity="0.8"/>
-        <path d="M198 188 L295 188 Q316 188 326 202 L340 236 L198 236 Z" fill="#5a1010" opacity="0.8"/>
-        <rect x="192" y="187" width="4" height="49" rx="2" fill="#1a0000"/>
-        <!-- red accent stripe -->
-        <rect x="18" y="292" width="364" height="5" rx="0" fill="#E8151B" opacity="0.6"/>
-        <circle cx="58" cy="320" r="32" fill="#0a0a0a"/><circle cx="58" cy="320" r="20" fill="#1a0000"/><circle cx="58" cy="320" r="10" fill="#E8151B" opacity="0.7"/>
-        <circle cx="340" cy="320" r="32" fill="#0a0a0a"/><circle cx="340" cy="320" r="20" fill="#1a0000"/><circle cx="340" cy="320" r="10" fill="#E8151B" opacity="0.7"/>
-        <!-- Person -->
-        <circle cx="410" cy="195" r="16" fill="#FFCC80"/>
-        <rect x="397" y="211" width="26" height="40" rx="7" fill="#E8151B"/>
-        <rect x="374" y="218" width="36" height="11" rx="5" fill="#FFCC80"/>
-        <!-- Mitt/sponge -->
-        <rect x="346" y="220" width="20" height="14" rx="7" fill="#FFD93D"/>
-        <!-- Water splashes -->
-        <ellipse cx="328" cy="226" rx="14" ry="6" fill="rgba(232,21,27,0.5)" transform="rotate(-12,328,226)"/>
-        <ellipse cx="315" cy="214" rx="9" ry="4" fill="rgba(232,21,27,0.4)"/>
-        <circle cx="320" cy="205" r="4" fill="rgba(255,100,100,0.6)"/>
-        <circle cx="305" cy="210" r="3" fill="rgba(232,21,27,0.5)"/>
-        <!-- Bubbles -->
-        <circle cx="380" cy="160" r="9" fill="none" stroke="rgba(232,21,27,0.5)" stroke-width="1.5"/>
-        <circle cx="355" cy="135" r="12" fill="none" stroke="rgba(232,21,27,0.4)" stroke-width="1.5"/>
-        <circle cx="385" cy="118" r="7" fill="none" stroke="rgba(232,21,27,0.3)" stroke-width="1.5"/>
-        <!-- Sparkles -->
-        <text x="60" y="155" font-size="16" fill="#E8151B">✦</text>
-        <text x="290" y="165" font-size="12" fill="#E8151B" opacity="0.8">✦</text>
-        <!-- Label -->
-        <rect x="18" y="410" width="190" height="30" rx="2" fill="rgba(232,21,27,0.15)" stroke="rgba(232,21,27,0.3)" stroke-width="1"/>
-        <text x="28" y="430" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#E8151B" letter-spacing="1">HAND WASH SERVICE</text>
-        <defs><linearGradient id="gg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(232,21,27,0.08)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/></linearGradient></defs>
-      </svg>
-    </div>
-    <div class="gallery-item">
-      <svg viewBox="0 0 280 230" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-        <rect width="280" height="230" fill="#080808"/>
-        <rect x="22" y="108" width="236" height="68" rx="13" fill="#1a0000"/>
-        <path d="M58 108 Q68 72 86 66 L202 66 Q220 66 227 78 L244 108 Z" fill="#220000"/>
-        <path d="M68 104 Q74 74 87 68 L136 68 L136 104 Z" fill="#5a1010" opacity="0.85"/>
-        <path d="M143 68 L198 68 Q213 68 220 79 L232 104 L143 104 Z" fill="#5a1010" opacity="0.85"/>
-        <rect x="138" y="67" width="3.5" height="37" rx="1.5" fill="#1a0000"/>
-        <rect x="22" y="150" width="236" height="4" rx="0" fill="#E8151B" opacity="0.5"/>
-        <circle cx="58" cy="174" r="22" fill="#0a0a0a"/><circle cx="58" cy="174" r="14" fill="#1a0000"/><circle cx="58" cy="174" r="7" fill="#E8151B" opacity="0.7"/>
-        <circle cx="222" cy="174" r="22" fill="#0a0a0a"/><circle cx="222" cy="174" r="14" fill="#1a0000"/><circle cx="222" cy="174" r="7" fill="#E8151B" opacity="0.7"/>
-        <path d="M88 78 Q138 70 188 78" stroke="rgba(232,21,27,0.5)" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <path d="M78 90 Q118 84 158 90" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <text x="16" y="48" font-size="20" fill="#E8151B">✦</text>
-        <text x="238" y="45" font-size="14" fill="#E8151B" opacity="0.8">✦</text>
-        <text x="126" y="36" font-size="11" fill="white" opacity="0.5">✦</text>
-        <rect x="14" y="200" width="150" height="22" rx="2" fill="rgba(232,21,27,0.15)" stroke="rgba(232,21,27,0.3)" stroke-width="1"/>
-        <text x="22" y="216" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#E8151B" letter-spacing="1">SPOTLESS FINISH</text>
-      </svg>
-    </div>
-    <div class="gallery-item">
-      <svg viewBox="0 0 280 230" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-        <rect width="280" height="230" fill="#050505"/>
-        <circle cx="140" cy="128" r="98" fill="#0a0a0a"/>
-        <circle cx="140" cy="128" r="78" fill="#141414"/>
-        <circle cx="140" cy="128" r="56" fill="#0a0a0a"/>
-        <circle cx="140" cy="128" r="33" fill="#1a1a1a"/>
-        <circle cx="140" cy="128" r="18" fill="#0a0a0a"/>
-        <circle cx="140" cy="128" r="9" fill="#E8151B" opacity="0.9"/>
-        <line x1="140" y1="72" x2="140" y2="95" stroke="#2a2a2a" stroke-width="6" stroke-linecap="round"/>
-        <line x1="140" y1="161" x2="140" y2="184" stroke="#2a2a2a" stroke-width="6" stroke-linecap="round"/>
-        <line x1="84" y1="128" x2="107" y2="128" stroke="#2a2a2a" stroke-width="6" stroke-linecap="round"/>
-        <line x1="173" y1="128" x2="196" y2="128" stroke="#2a2a2a" stroke-width="6" stroke-linecap="round"/>
-        <line x1="100" y1="88" x2="118" y2="106" stroke="#2a2a2a" stroke-width="4.5" stroke-linecap="round"/>
-        <line x1="162" y1="150" x2="180" y2="168" stroke="#2a2a2a" stroke-width="4.5" stroke-linecap="round"/>
-        <line x1="100" y1="168" x2="118" y2="150" stroke="#2a2a2a" stroke-width="4.5" stroke-linecap="round"/>
-        <line x1="162" y1="106" x2="180" y2="88" stroke="#2a2a2a" stroke-width="4.5" stroke-linecap="round"/>
-        <!-- Brush -->
-        <rect x="210" y="58" width="11" height="46" rx="3.5" fill="#5D4037"/>
-        <rect x="204" y="103" width="23" height="15" rx="4" fill="#FFD93D"/>
-        <ellipse cx="194" cy="120" rx="11" ry="5" fill="rgba(232,21,27,0.6)"/>
-        <circle cx="184" cy="112" r="3" fill="rgba(232,21,27,0.7)"/>
-        <circle cx="200" cy="108" r="3.5" fill="rgba(255,100,100,0.5)"/>
-        <!-- Red glow ring -->
-        <circle cx="140" cy="128" r="98" fill="none" stroke="rgba(232,21,27,0.12)" stroke-width="3"/>
-        <rect x="14" y="200" width="180" height="22" rx="2" fill="rgba(232,21,27,0.15)" stroke="rgba(232,21,27,0.3)" stroke-width="1"/>
-        <text x="22" y="216" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#E8151B" letter-spacing="1">WHEEL & TIRE DETAIL</text>
-      </svg>
-    </div>
-    <div class="gallery-item">
-      <svg viewBox="0 0 280 230" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-        <rect width="280" height="230" fill="#080808"/>
-        <!-- Interior -->
-        <rect x="18" y="72" width="110" height="110" rx="10" fill="#180000"/>
-        <rect x="22" y="76" width="102" height="66" rx="9" fill="#200000"/>
-        <rect x="22" y="145" width="102" height="24" rx="7" fill="#200000"/>
-        <rect x="152" y="72" width="110" height="110" rx="10" fill="#180000"/>
-        <rect x="156" y="76" width="102" height="66" rx="9" fill="#200000"/>
-        <rect x="156" y="145" width="102" height="24" rx="7" fill="#200000"/>
-        <path d="M30 83 Q72 78 120 83" stroke="rgba(232,21,27,0.15)" stroke-width="1.5" fill="none"/>
-        <path d="M163 83 Q205 78 253 83" stroke="rgba(232,21,27,0.15)" stroke-width="1.5" fill="none"/>
-        <rect x="118" y="102" width="44" height="80" rx="9" fill="#100000"/>
-        <rect x="122" y="112" width="36" height="20" rx="5" fill="#1a0000"/>
-        <circle cx="140" cy="155" r="9" fill="#E8151B" opacity="0.5"/>
-        <!-- Dashboard -->
-        <rect x="8" y="25" width="264" height="42" rx="8" fill="#100000"/>
-        <rect x="76" y="32" width="128" height="28" rx="6" fill="#1a0000"/>
-        <circle cx="44" cy="46" r="15" fill="#080808" stroke="#1a0000" stroke-width="2.5"/>
-        <circle cx="236" cy="46" r="15" fill="#080808" stroke="#1a0000" stroke-width="2.5"/>
-        <!-- Vacuum -->
-        <rect x="196" y="148" width="62" height="9" rx="4" fill="#555"/>
-        <rect x="242" y="132" width="10" height="28" rx="3.5" fill="#444"/>
-        <ellipse cx="196" cy="152" rx="13" ry="7" fill="#666"/>
-        <!-- Dust particles -->
-        <circle cx="183" cy="147" r="3" fill="rgba(180,120,60,0.6)"/>
-        <circle cx="173" cy="140" r="2" fill="rgba(180,120,60,0.5)"/>
-        <circle cx="179" cy="134" r="2" fill="rgba(180,120,60,0.4)"/>
-        <text x="22" y="65" font-size="11" fill="#E8151B" opacity="0.8">✦</text>
-        <text x="248" y="68" font-size="9" fill="#E8151B" opacity="0.7">✦</text>
-        <rect x="14" y="200" width="152" height="22" rx="2" fill="rgba(232,21,27,0.15)" stroke="rgba(232,21,27,0.3)" stroke-width="1"/>
-        <text x="22" y="216" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#E8151B" letter-spacing="1">INTERIOR DETAILING</text>
-      </svg>
-    </div>
-    <div class="gallery-item">
-      <svg viewBox="0 0 280 230" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-        <rect width="280" height="230" fill="#060606"/>
-        <!-- Before -->
-        <rect x="0" y="0" width="138" height="230" fill="#0c0c0c"/>
-        <rect x="8" y="108" width="122" height="58" rx="10" fill="#1c1c1c"/>
-        <path d="M24 108 Q32 78 46 72 L112 72 Q124 72 130 82 L138 108 Z" fill="#242424"/>
-        <path d="M32 104 Q37 80 47 74 L78 74 L78 104 Z" fill="#555" opacity="0.6"/>
-        <path d="M84 74 L110 74 Q120 74 126 84 L134 104 L84 104 Z" fill="#555" opacity="0.6"/>
-        <ellipse cx="52" cy="118" rx="11" ry="5" fill="rgba(80,50,10,0.55)" transform="rotate(-10,52,118)"/>
-        <ellipse cx="100" cy="114" rx="8" ry="4" fill="rgba(80,50,10,0.45)"/>
-        <ellipse cx="78" cy="128" rx="9" ry="4" fill="rgba(80,50,10,0.5)"/>
-        <circle cx="40" cy="165" r="18" fill="#111"/><circle cx="40" cy="165" r="11" fill="#1a1a1a"/>
-        <circle cx="110" cy="165" r="18" fill="#111"/><circle cx="110" cy="165" r="11" fill="#1a1a1a"/>
-        <text x="36" y="206" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#ff4444" letter-spacing="1">BEFORE</text>
-        <!-- Divider arrow -->
-        <rect x="134" y="0" width="12" height="230" fill="#E8151B"/>
-        <polygon points="140,100 150,115 130,115" fill="#fff"/>
-        <!-- After -->
-        <rect x="146" y="0" width="134" height="230" fill="#080808"/>
-        <rect x="152" y="108" width="122" height="58" rx="10" fill="#1a0000"/>
-        <path d="M168 108 Q176 78 190 72 L256 72 Q268 72 274 82 L282 108 Z" fill="#220000"/>
-        <path d="M176 104 Q181 80 191 74 L222 74 L222 104 Z" fill="#5a1010" opacity="0.85"/>
-        <path d="M228 74 L254 74 Q264 74 270 84 L278 104 L228 104 Z" fill="#5a1010" opacity="0.85"/>
-        <path d="M192 82 Q222 75 252 82" stroke="rgba(232,21,27,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <circle cx="184" cy="165" r="18" fill="#0a0a0a"/><circle cx="184" cy="165" r="11" fill="#1a0000"/><circle cx="184" cy="165" r="5" fill="#E8151B" opacity="0.8"/>
-        <circle cx="254" cy="165" r="18" fill="#0a0a0a"/><circle cx="254" cy="165" r="11" fill="#1a0000"/><circle cx="254" cy="165" r="5" fill="#E8151B" opacity="0.8"/>
-        <text x="152" y="82" font-size="14" fill="#E8151B">✦</text>
-        <text x="256" y="78" font-size="10" fill="#E8151B" opacity="0.8">✦</text>
-        <text x="180" y="200" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#3DDC84" letter-spacing="1">AFTER</text>
-      </svg>
-    </div>
-  </div>
-</section>
 
 <!-- SERVICES -->
 <section id="services">
@@ -552,25 +277,6 @@
   <div class="services-grid">
 
     <div class="service-card">
-      <svg class="service-thumb" viewBox="0 0 400 155" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="155" fill="#080808"/>
-        <rect x="58" y="72" width="284" height="58" rx="12" fill="#1a0000"/>
-        <path d="M108 72 Q118 44 136 38 L276 38 Q294 38 302 50 L318 72 Z" fill="#220000"/>
-        <path d="M120 68 Q126 46 138 40 L184 40 L184 68 Z" fill="#5a1010" opacity="0.8"/>
-        <path d="M190 40 L268 40 Q282 40 289 52 L304 68 L190 68 Z" fill="#5a1010" opacity="0.8"/>
-        <circle cx="108" cy="128" r="26" fill="#0a0a0a"/><circle cx="108" cy="128" r="16" fill="#1a0000"/>
-        <circle cx="300" cy="128" r="26" fill="#0a0a0a"/><circle cx="300" cy="128" r="16" fill="#1a0000"/>
-        <rect x="20" y="52" width="7" height="32" rx="3" fill="#666"/>
-        <rect x="9" y="50" width="20" height="7" rx="3" fill="#888"/>
-        <line x1="8" y1="47" x2="43" y2="39" stroke="rgba(232,21,27,0.7)" stroke-width="2"/>
-        <line x1="8" y1="53" x2="46" y2="52" stroke="rgba(232,21,27,0.85)" stroke-width="2.5"/>
-        <line x1="8" y1="60" x2="43" y2="67" stroke="rgba(232,21,27,0.7)" stroke-width="2"/>
-        <circle cx="46" cy="39" r="3" fill="rgba(232,21,27,0.7)"/>
-        <circle cx="49" cy="52" r="4" fill="rgba(232,21,27,0.8)"/>
-        <circle cx="46" cy="67" r="3" fill="rgba(232,21,27,0.7)"/>
-        <text x="318" y="34" font-size="13" fill="#E8151B">✦</text>
-        <text x="348" y="52" font-size="9" fill="#E8151B" opacity="0.7">✦</text>
-      </svg>
       <div class="service-header">
         <div class="service-name">Basic Wash</div>
         <div class="service-desc">Thorough exterior wash to get rid of everyday dust, dirt, and grime.</div>
@@ -587,22 +293,6 @@
 
     <div class="service-card popular">
       <div class="popular-badge">⭐ Most Popular</div>
-      <svg class="service-thumb" viewBox="0 0 400 155" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="155" fill="#080808"/>
-        <rect x="52" y="74" width="296" height="60" rx="13" fill="#1a0000"/>
-        <path d="M102 74 Q115 42 134 35 L276 35 Q298 35 308 50 L326 74 Z" fill="#220000"/>
-        <path d="M116 70 Q122 44 136 38 L184 38 L184 70 Z" fill="#6a1515" opacity="0.9"/>
-        <path d="M192 38 L268 38 Q286 38 296 52 L308 70 L192 70 Z" fill="#6a1515" opacity="0.9"/>
-        <rect x="184" y="37" width="6" height="33" rx="3" fill="#1a0000"/>
-        <path d="M136 48 Q186 40 236 48" stroke="rgba(232,21,27,0.6)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-        <path d="M122 60 Q165 54 208 60" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <circle cx="104" cy="131" r="28" fill="#0a0a0a"/><circle cx="104" cy="131" r="18" fill="#1a0000"/><circle cx="104" cy="131" r="9" fill="#E8151B" opacity="0.8"/>
-        <circle cx="300" cy="131" r="28" fill="#0a0a0a"/><circle cx="300" cy="131" r="18" fill="#1a0000"/><circle cx="300" cy="131" r="9" fill="#E8151B" opacity="0.8"/>
-        <text x="18" y="36" font-size="18" fill="#E8151B">✦</text>
-        <text x="356" y="38" font-size="14" fill="#E8151B">✦</text>
-        <text x="186" y="22" font-size="12" fill="#E8151B" opacity="0.8">✦</text>
-        <text x="335" y="66" font-size="9" fill="#E8151B" opacity="0.6">✦</text>
-      </svg>
       <div class="service-header">
         <div class="service-name">Signature Wash</div>
         <div class="service-desc">Deep clean inside and out, leaving your car looking like new.</div>
@@ -619,25 +309,6 @@
     </div>
 
     <div class="service-card">
-      <svg class="service-thumb" viewBox="0 0 400 155" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="155" fill="#050508"/>
-        <rect x="48" y="76" width="304" height="62" rx="13" fill="#0d0020"/>
-        <path d="M98 76 Q112 42 132 34 L278 34 Q300 34 311 51 L330 76 Z" fill="#140028"/>
-        <path d="M112 72 Q118 45 134 38 L182 38 L182 72 Z" fill="#2a0050" opacity="0.85"/>
-        <path d="M190 38 L270 38 Q290 38 300 54 L312 72 L190 72 Z" fill="#2a0050" opacity="0.85"/>
-        <path d="M134 50 Q185 42 235 50" stroke="rgba(200,100,255,0.35)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-        <circle cx="100" cy="133" r="28" fill="#080808"/><circle cx="100" cy="133" r="18" fill="#160030"/><circle cx="100" cy="133" r="9" fill="#E8151B" opacity="0.9"/>
-        <circle cx="302" cy="133" r="28" fill="#080808"/><circle cx="302" cy="133" r="18" fill="#160030"/><circle cx="302" cy="133" r="9" fill="#E8151B" opacity="0.9"/>
-        <!-- polisher -->
-        <circle cx="365" cy="68" r="20" fill="#E8151B" opacity="0.9"/>
-        <circle cx="365" cy="68" r="14" fill="#ff6666"/>
-        <circle cx="365" cy="68" r="7" fill="#ff9999"/>
-        <rect x="362" y="42" width="6" height="19" rx="3" fill="#666"/>
-        <rect x="354" y="38" width="22" height="9" rx="4" fill="#555"/>
-        <polygon points="190,8 204,18 199,32 181,32 176,18" fill="rgba(200,100,255,0.2)" stroke="rgba(200,100,255,0.4)" stroke-width="1.5"/>
-        <text x="18" y="30" font-size="16" fill="#E8151B">✦</text>
-        <text x="330" y="28" font-size="12" fill="#E8151B" opacity="0.8">✦</text>
-      </svg>
       <div class="service-header">
         <div class="service-name">Full Detail</div>
         <div class="service-desc">Intensive detail that restores your car to showroom condition.</div>
@@ -654,25 +325,6 @@
     </div>
 
     <div class="service-card">
-      <svg class="service-thumb" viewBox="0 0 400 155" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="155" fill="#080808"/>
-        <rect x="38" y="64" width="324" height="76" rx="13" fill="#001a00"/>
-        <path d="M85 64 Q97 22 122 14 L290 14 Q320 14 332 36 L358 64 Z" fill="#002200"/>
-        <path d="M100 60 Q108 26 124 18 L188 18 L188 60 Z" fill="#224422" opacity="0.8"/>
-        <path d="M196 18 L283 18 Q308 18 320 34 L342 60 L196 60 Z" fill="#224422" opacity="0.8"/>
-        <!-- roof rack -->
-        <rect x="125" y="8" width="164" height="8" rx="2.5" fill="#001a00"/>
-        <rect x="138" y="3" width="5" height="11" rx="2" fill="#003300"/>
-        <rect x="172" y="3" width="5" height="11" rx="2" fill="#003300"/>
-        <rect x="206" y="3" width="5" height="11" rx="2" fill="#003300"/>
-        <rect x="240" y="3" width="5" height="11" rx="2" fill="#003300"/>
-        <rect x="274" y="3" width="5" height="11" rx="2" fill="#003300"/>
-        <circle cx="102" cy="136" r="32" fill="#0a0a0a"/><circle cx="102" cy="136" r="21" fill="#1a1a1a"/><circle cx="102" cy="136" r="11" fill="#0a0a0a"/><circle cx="102" cy="136" r="5" fill="#E8151B" opacity="0.8"/>
-        <circle cx="304" cy="136" r="32" fill="#0a0a0a"/><circle cx="304" cy="136" r="21" fill="#1a1a1a"/><circle cx="304" cy="136" r="11" fill="#0a0a0a"/><circle cx="304" cy="136" r="5" fill="#E8151B" opacity="0.8"/>
-        <path d="M124 26 Q190 18 256 26" stroke="rgba(232,21,27,0.35)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <text x="18" y="44" font-size="13" fill="#E8151B">✦</text>
-        <text x="368" y="40" font-size="10" fill="#E8151B" opacity="0.7">✦</text>
-      </svg>
       <div class="service-header">
         <div class="service-name">SUV / Truck Add-on</div>
         <div class="service-desc">Add to any package for trucks and large SUVs. They need extra love!</div>
